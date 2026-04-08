@@ -1,9 +1,9 @@
 export type Answer = {
   trackName: string;
   song: string;
-  trackLayout: string;
+  trackLayoutPath: string;
   cup: string;
-  screenshot: string;
-  trackMainImage: string;
-  trackHintImage: string;
+  screenshotPath: string;
+  trackMainImagePath: string;
+  cupImagePath: string;
 };

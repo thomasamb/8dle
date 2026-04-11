@@ -1,16 +1,17 @@
 import GameState from "./gameState";
 import { Answer } from "./answer";
 import { answerSet } from "./answerSet";
+import generateAnswer from "./generateAnswer";
 
-class GameHandler {
+export default class GameHandler {
   gameState: GameState;
 
-  constructor() {
-    this.gameState = new GameState(0, 0, this.getNewAnswer());
-  }
-
-  getNewAnswer(): Answer {
-    return answerSet[0];
+  constructor(gameState: GameState | null = null) {
+    if (gameState === null) {
+      this.gameState = new GameState(0, 0, generateAnswer());
+    } else {
+      this.gameState = gameState;
+    }
   }
 
   submitGuess(guess: string) {

@@ -49,7 +49,7 @@ export default function Search({
               placeholder="Guess a track..."
               autoComplete="off"
             />
-            <Button id="guessButton" variant="primary" type="submit">
+            <Button id="guessButton" type="submit">
               <SlArrowRightCircle id="guessButtonIcon" />
             </Button>
           </InputGroup>

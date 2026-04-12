@@ -6,6 +6,7 @@ import { useState } from "react";
 import GameHandler from "../lib/gameHandler";
 import { Modal } from "react-bootstrap";
 import Image from "next/image";
+import RoundTracker from "./roundTracker";
 
 export default function Game() {
   const [gameHandler, setGameHandler] = useState(new GameHandler());
@@ -21,14 +22,6 @@ export default function Game() {
         gameHandler={gameHandler}
       />
       <GameEndModal gameState={gameState} />
-    </>
-  );
-}
-
-function RoundTracker({ gameState }: { gameState: GameState }) {
-  return (
-    <>
-      <p>Round</p>
     </>
   );
 }

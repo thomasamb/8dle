@@ -1,6 +1,6 @@
 import { Answer } from "./answer";
 
-const pathPrefix = "../public/assets/Cups";
+const pathPrefix = "/assets/Cups";
 
 export const answerSet: Array<Answer> = [
   {

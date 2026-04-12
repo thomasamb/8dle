@@ -8,7 +8,7 @@ export default class GameHandler {
 
   constructor(gameState: GameState | null = null) {
     if (gameState === null) {
-      this.gameState = new GameState(0, 0, generateAnswer());
+      this.gameState = new GameState(1, 0, generateAnswer());
     } else {
       this.gameState = gameState;
     }
@@ -20,7 +20,7 @@ export default class GameHandler {
       this.gameState.won = true;
       this.gameWon();
     } else {
-      if (this.gameState.guesses >= 5) {
+      if (this.gameState.guesses >= 4) {
         this.gameState.lost = true;
         this.gameLost();
       }

@@ -10,6 +10,7 @@ export default function Game() {
   const [gameState, setGameState] = useState(gameHandler.gameState);
   return (
     <>
+      <GameHeader gameState={gameState} />
       <Clue gameState={gameState} />
       <RoundTracker gameState={gameState} />
       <Search gameState={gameState} setGameState={setGameState} />
@@ -17,10 +18,34 @@ export default function Game() {
   );
 }
 
-function RoundTracker({gameState}: any) {
+function RoundTracker({ gameState }: { gameState: GameState }) {
   return (
     <>
       <p>Round</p>
     </>
+  );
+}
+
+function GameHeader({ gameState }: { gameState: GameState }) {
+  console.log(gameState.round);
+  let headerText = "Guess the track!";
+  let subHeaderText = "";
+  switch (gameState.round) {
+    case 1:
+      subHeaderText = "Track Layout";
+    case 2:
+      subHeaderText = "Screenshot";
+    case 3:
+      subHeaderText = "Cup";
+    case 4:
+      "Track Song";
+    default:
+      "Round Error"
+  }
+  return (
+    <div id="gameHeader">
+      <h1 id="gameHeaderH1">{headerText}</h1>
+      <h2 id="gameHeaderH2">{subHeaderText}</h2>
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./ui/header";
 import Footer from "./ui/footer";
 import Game from "./ui/game";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

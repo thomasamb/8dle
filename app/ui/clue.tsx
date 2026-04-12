@@ -3,8 +3,6 @@ import Image from "next/image";
 
 export default function Clue({ gameState }: { gameState: GameState }) {
   function roundSwitch(round: number) {
-    console.log(round);
-    console.log(gameState.answer.trackLayoutPath);
     switch (round) {
       case 1:
         return (

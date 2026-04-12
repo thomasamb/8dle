@@ -12,7 +12,7 @@ export default function Game() {
   const [gameHandler, setGameHandler] = useState(new GameHandler());
   const [gameState, setGameState] = useState(gameHandler.gameState);
   return (
-    <>
+    <div id="game">
       <GameHeader />
       <Clue gameState={gameState} />
       <RoundTracker gameState={gameState} />
@@ -22,7 +22,7 @@ export default function Game() {
         gameHandler={gameHandler}
       />
       <GameEndModal gameState={gameState} />
-    </>
+    </div>
   );
 }
 

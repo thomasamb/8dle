@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "./ui/header";
 import Footer from "./ui/footer";
 import Game from "./ui/game";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,16 +32,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <div className="header">
-          <Header />
-        </div>
-        <div className="game">
-          <Game />
-        </div>
+        <Header />
         {children}
-        <div className="footer">
-          <Footer />
-        </div>
+        <Footer />
       </body>
     </html>
   );

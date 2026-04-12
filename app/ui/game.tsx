@@ -14,8 +14,8 @@ export default function Game() {
   return (
     <div id="game">
       <GameHeader />
-      <Clue gameState={gameState} />
       <RoundTracker gameState={gameState} />
+      <Clue gameState={gameState} />
       <Search
         gameState={gameState}
         setGameState={setGameState}

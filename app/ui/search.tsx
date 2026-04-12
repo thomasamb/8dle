@@ -1,8 +1,9 @@
 import GameState from "../lib/gameState";
 import { useActionState, useState } from "react";
 import GameHandler from "../lib/gameHandler";
-import { Button, Dropdown, Form } from "react-bootstrap";
+import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { answerSet } from "../lib/answerSet";
+import { SlArrowRightCircle } from "react-icons/sl";
 
 export default function Search({
   gameState,
@@ -32,21 +33,26 @@ export default function Search({
   );
 
   return (
-    <>
+    <div id="searchContainer">
       <form action={formAction}>
         <Dropdown show={showDropdown && input.length > 0}>
-          <Form.Control
-            type="text"
-            name="guess"
-            value={input}
-            onChange={(e) => {
-              setInput(e.target.value);
-              setShowDropdown(true);
-            }}
-            onBlur={() => setShowDropdown(false)}
-            placeholder="Guess a track..."
-            autoComplete="off"
-          />
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              name="guess"
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setShowDropdown(true);
+              }}
+              onBlur={() => setShowDropdown(false)}
+              placeholder="Guess a track..."
+              autoComplete="off"
+            />
+            <Button id="guessButton" variant="primary" type="submit">
+              <SlArrowRightCircle id="guessButtonIcon" />
+            </Button>
+          </InputGroup>
           <Dropdown.Menu>
             {filtered.map((answer) => (
               <Dropdown.Item
@@ -61,10 +67,7 @@ export default function Search({
             ))}
           </Dropdown.Menu>
         </Dropdown>
-        <Button variant="primary" type="submit">
-          Guess
-        </Button>
       </form>
-    </>
+    </div>
   );
 }

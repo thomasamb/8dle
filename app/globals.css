@@ -2,6 +2,7 @@
 :root {
   --max-width: 600px;
   --spacing-sm: 0.5rem;
+  --spacing-xsm: 0.3rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --headerBackgroundColor: #0a0a1a;
@@ -105,4 +106,25 @@ main {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+}
+
+/* Footer */
+#footerContainer {
+  position: absolute;
+  bottom: 0;
+  height: 10vh;
+  margin-bottom: var(--spacing-md);
+  background-color: var(--headerBackgroundColor);
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#footerContainer p {
+  color: var(--headerTextColor);
+  margin-bottom: var(--spacing-xsm);
+  text-align: center;
+  font-size: clamp(0.6rem, 2vw, 0.875rem);
 }

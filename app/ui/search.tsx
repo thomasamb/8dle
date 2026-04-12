@@ -44,7 +44,7 @@ export default function Search({
               setShowDropdown(true);
             }}
             onBlur={() => setShowDropdown(false)}
-            placeholder="Search for a track..."
+            placeholder="Guess a track..."
             autoComplete="off"
           />
           <Dropdown.Menu>

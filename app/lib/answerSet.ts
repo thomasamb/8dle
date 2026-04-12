@@ -10,6 +10,6 @@ export const answerSet: Array<Answer> = [
     cup: "Mushroom Cup",
     screenshotPath: `${pathPrefix}/Mushroom/MarioKartStadium/screenshot.png`,
     trackMainImagePath: `${pathPrefix}/Mushroom/MarioKartStadium/mainImage.png`,
-    cupImagePath: `${pathPrefix}/MushroomCup.png`,
+    cupImagePath: `${pathPrefix}/Mushroom/MushroomCup.png`,
   },
 ];

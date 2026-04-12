@@ -14,20 +14,22 @@ export default class GameHandler {
     }
   }
 
-  submitGuess(guess: string) {
-    this.gameState.guesses++;
-    if (guess === this.gameState.answer.trackName) {
-      this.gameState.won = true;
-      this.gameWon();
+  submitGuess(guess: string): GameState {
+    const newGameState = new GameState(
+      this.gameState.round,
+      this.gameState.guesses + 1,
+      this.gameState.answer,
+    );
+    if (guess === newGameState.answer.trackName) {
+      newGameState.won = true;
     } else {
-      if (this.gameState.guesses >= 4) {
-        this.gameState.lost = true;
-        this.gameLost();
+      if (newGameState.guesses >= 4) {
+        newGameState.lost = true;
+      } else {
+        newGameState.round++;
       }
     }
+    this.gameState = newGameState;
+    return newGameState;
   }
-
-  gameWon() {}
-
-  gameLost() {}
 }

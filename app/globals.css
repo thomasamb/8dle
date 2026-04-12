@@ -25,6 +25,16 @@ body {
 }
 
 /* Header */
+#siteHeader {
+  height: 10vh;
+  margin-bottom: var(--spacing-md);
+  background-color: blue;
+  width: 100%;
+}
+#siteHeader.headerText {
+  text-align: center;
+}
+
 #gameHeader {
   width: 100%;
   text-align: center;

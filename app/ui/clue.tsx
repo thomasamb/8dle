@@ -40,7 +40,7 @@ export default function Clue({ gameState }: { gameState: GameState }) {
           alt={gameState.answer.cup}
           height={100}
           width={100}
-          className="clueImage"
+          className="cupImage"
         />
       </div>
     );

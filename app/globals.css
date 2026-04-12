@@ -4,6 +4,8 @@
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
+  --headerBackgroundColor: #0a0a1a;
+  --headerTextColor: #e8e0f0;
 }
 
 body {
@@ -14,6 +16,48 @@ body {
   padding: var(--spacing-md);
 }
 
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-md);
+}
+
+/* Header */
+#siteHeader {
+  height: 10vh;
+  margin-bottom: var(--spacing-md);
+  background-color: var(--headerBackgroundColor);
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#siteHeader h1 {
+  text-align: center;
+  vertical-align: auto;
+  color: var(--headerTextColor);
+}
+
+#headerImage img {
+  width: clamp(2rem, 5vw, 3rem);
+  height: auto;
+  float: left;
+}
+
+#logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#logoContainer h1 {
+  margin: 0;
+}
+
+/* Game */
 /* Main game container */
 #game {
   width: 100%;
@@ -22,17 +66,6 @@ body {
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-md);
-}
-
-/* Header */
-#siteHeader {
-  height: 10vh;
-  margin-bottom: var(--spacing-md);
-  background-color: blue;
-  width: 100%;
-}
-#siteHeader.headerText {
-  text-align: center;
 }
 
 #gameHeader {

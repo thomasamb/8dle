@@ -111,7 +111,12 @@ main {
 }
 
 .clueImage {
-  width: clamp(200px, 80vw, 400px);
+  width: clamp(100px, 55vw, 225px);
+  height: auto;
+}
+
+.cupImage {
+  width: clamp(100px, 3vw, 225px);
   height: auto;
 }
 

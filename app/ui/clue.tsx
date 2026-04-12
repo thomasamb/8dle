@@ -12,6 +12,7 @@ export default function Clue({ gameState }: { gameState: GameState }) {
           alt="Track layout"
           height={100}
           width={100}
+          className="clueImage"
         />
       </div>
     );
@@ -25,6 +26,7 @@ export default function Clue({ gameState }: { gameState: GameState }) {
           alt="Track screenshot"
           height={100}
           width={100}
+          className="clueImage"
         />
       </div>
     );
@@ -38,6 +40,7 @@ export default function Clue({ gameState }: { gameState: GameState }) {
           alt={gameState.answer.cup}
           height={100}
           width={100}
+          className="clueImage"
         />
       </div>
     );

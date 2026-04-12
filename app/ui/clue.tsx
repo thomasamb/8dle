@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import GameState from "../lib/gameState";
 import Image from "next/image";
+import { Pagination } from "react-bootstrap";
 
 export default function Clue({ gameState }: { gameState: GameState }) {
+  let active = 1;
   function roundSwitch(round: number) {
     switch (round) {
       case 1:

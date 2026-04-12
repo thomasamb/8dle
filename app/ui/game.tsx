@@ -13,7 +13,7 @@ export default function Game() {
   const [gameState, setGameState] = useState(gameHandler.gameState);
   return (
     <>
-      <GameHeader gameState={gameState} />
+      <GameHeader />
       <Clue gameState={gameState} />
       <RoundTracker gameState={gameState} />
       <Search
@@ -26,30 +26,10 @@ export default function Game() {
   );
 }
 
-function GameHeader({ gameState }: { gameState: GameState }) {
-  let headerText = "Guess the track!";
-  let subHeaderText = "";
-  switch (gameState.round) {
-    case 1:
-      subHeaderText = "Track Layout";
-      break;
-    case 2:
-      subHeaderText = "Screenshot";
-      break;
-    case 3:
-      subHeaderText = "Cup";
-      break;
-    case 4:
-      subHeaderText = "Track Song";
-      break;
-    default:
-      "Round Error";
-      break;
-  }
+function GameHeader() {
   return (
     <div id="gameHeader">
-      <h1 id="gameHeaderH1">{headerText}</h1>
-      <h2 id="gameHeaderH2">{subHeaderText}</h2>
+      <h1 id="gameHeaderH1">Guess the track!</h1>
     </div>
   );
 }

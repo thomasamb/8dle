@@ -38,6 +38,7 @@ export default function Search({
         <Dropdown show={showDropdown && input.length > 0}>
           <InputGroup className="mb-3">
             <Form.Control
+              disabled={gameState.won || gameState.lost}
               type="text"
               name="guess"
               value={input}
@@ -49,7 +50,11 @@ export default function Search({
               placeholder="Guess a track..."
               autoComplete="off"
             />
-            <Button id="guessButton" type="submit">
+            <Button
+              disabled={gameState.won || gameState.lost}
+              id="guessButton"
+              type="submit"
+            >
               <SlArrowRightCircle id="guessButtonIcon" />
             </Button>
           </InputGroup>

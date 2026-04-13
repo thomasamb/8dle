@@ -72,6 +72,7 @@ main {
   padding: 0 var(--spacing-sm);
 }
 
+/* Game Headers */
 #gameHeader {
   width: 100%;
   max-width: var(--max-width);
@@ -84,7 +85,8 @@ main {
 }
 
 #gameHeaderH2 {
-  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-size: clamp(1.25rem, 5vw, 2rem);
+  color: var(--blue-color);
 }
 
 /* Search */

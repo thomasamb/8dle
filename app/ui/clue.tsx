@@ -30,7 +30,9 @@ export default function Clue({ gameState }: { gameState: GameState }) {
             <Pagination.Item
               key={p.key}
               active={page === p.round}
-              disabled={p.round > gameState.round}
+              disabled={
+                p.round > gameState.round && !(gameState.won || gameState.lost)
+              }
               onClick={() => setPage(p.round as 1 | 2 | 3 | 4)}
               className="pageButton"
             >

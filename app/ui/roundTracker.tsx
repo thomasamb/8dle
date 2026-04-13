@@ -13,10 +13,10 @@ export default function RoundTracker({ gameState }: { gameState: GameState }) {
   };
   return (
     <div id="roundTracker" className="d-flex gap-2">
-      <span>{heart(1)}</span>
-      <span>{heart(2)}</span>
-      <span>{heart(3)}</span>
       <span>{heart(4)}</span>
+      <span>{heart(3)}</span>
+      <span>{heart(2)}</span>
+      <span>{heart(1)}</span>
     </div>
   );
 }

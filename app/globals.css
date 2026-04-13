@@ -156,6 +156,12 @@ main {
   opacity: 0.8;
 }
 
+#songButton {
+  background-color: var(--blue-color);
+  border-color: var(--blue-color);
+  color: #0a0a1a;
+}
+
 /* Round Tracker */
 #roundTracker {
   display: flex;

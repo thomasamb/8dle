@@ -8,6 +8,7 @@
   --headerBackgroundColor: #0a0a1a;
   --headerTextColor: #e8e0f0;
   --blue-color: #21c4de;
+  --inActivePageColor: #1a8fa3;
 }
 
 body {
@@ -123,6 +124,36 @@ main {
 .cupImage {
   width: clamp(100px, 3vw, 225px);
   height: auto;
+}
+
+#cluesPagination .pagination {
+  gap: var(--spacing-sm);
+}
+
+#cluesPagination .page-item .page-link {
+  border-radius: var(--border-radius-md, 8px);
+}
+
+#cluesPagination .page-link {
+  background-color: var(--blue-color);
+  border-color: var(--blue-color);
+  color: #0a0a1a;
+}
+
+#cluesPagination .page-item.active .page-link {
+  background-color: var(--blue-color);
+  border-color: var(--blue-color);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  outline: 3px solid;
+  outline-color: #21c4de;
+  border-radius: 8px;
+}
+
+#cluesPagination .page-item.disabled .page-link {
+  background-color: grey;
+  border-color: grey;
+  opacity: 0.8;
 }
 
 /* Round Tracker */

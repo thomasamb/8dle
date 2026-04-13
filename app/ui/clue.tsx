@@ -9,10 +9,10 @@ export default function Clue({ gameState }: { gameState: GameState }) {
     setPage(gameState.round as 1 | 2 | 3 | 4);
   }, [gameState.round]);
   const pages = [
-    { key: "Track Layout", round: 1 },
-    { key: "Screenshot", round: 2 },
-    { key: "Cup", round: 3 },
-    { key: "Track Song", round: 4 },
+    { key: "Layout", round: 1 },
+    { key: "Cup", round: 2 },
+    { key: "Screenshot", round: 3 },
+    { key: "Music", round: 4 },
   ];
   const roundPageMapping = {
     1: <Round1 gameState={gameState} />,
@@ -32,6 +32,7 @@ export default function Clue({ gameState }: { gameState: GameState }) {
               active={page === p.round}
               disabled={p.round > gameState.round}
               onClick={() => setPage(p.round as 1 | 2 | 3 | 4)}
+              className="pageButton"
             >
               {p.key}
             </Pagination.Item>

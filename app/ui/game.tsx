@@ -14,13 +14,13 @@ export default function Game() {
   return (
     <div id="game">
       <GameHeader />
-      <RoundTracker gameState={gameState} />
       <Clue gameState={gameState} />
       <Search
         gameState={gameState}
         setGameState={setGameState}
         gameHandler={gameHandler}
       />
+      <RoundTracker gameState={gameState} />
       <GameEndModal gameState={gameState} />
     </div>
   );

@@ -208,3 +208,58 @@ main {
   text-align: center;
   font-size: clamp(0.6rem, 2vw, 0.875rem);
 }
+
+/* Game End Modal */
+#gameEndModal {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+#gameEndModal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#gameEndModal .modal-title {
+  flex: 1;
+  text-align: center;
+  font-size: clamp(1.3rem, 3vw, 1.25rem);
+}
+
+#gameEndModal .modal-content {
+  width: 100%;
+  max-width: 90vw;
+}
+
+.gameEndModalDialog {
+  width: 90vw;
+  max-width: 90vw;
+  margin: 15vh auto !important;
+}
+
+#gameEndModal p {
+  text-align: center;
+  font-size: clamp(0.875rem, 3vw, 1.5rem);
+}
+
+.modalTrackImage {
+  width: clamp(150px, 60vw, 400px);
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.gameEndModalBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}

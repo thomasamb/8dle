@@ -69,6 +69,7 @@ main {
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-md);
+  padding: 0 var(--spacing-sm)
 }
 
 #gameHeader {
@@ -104,25 +105,39 @@ main {
 
 /* Clues */
 #cluesContainer {
-  width: 100%;
+  max-width: 800px;
+  width: min(95vw, 500px);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-md);
 }
 
+#clueDisplay {
+  width: clamp(200px, 80vw, 500px);
+  height: clamp(200px, 50vw, 400px);
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
 .trackLayoutImage {
-  width: clamp(100px, 35vw, 225px);
+  width: clamp(100px, 60vw, 300px);
   height: auto;
 }
 
 .trackScreenshotImage {
-  width: clamp(100px, 55vw, 225px);
+  width: clamp(200px, 100vw, 500px);
   height: auto;
+  object-fit: contain;
 }
 
 .cupImage {
-  width: clamp(100px, 3vw, 225px);
+  width: clamp(100px, 30vw, 200px);
   height: auto;
 }
 

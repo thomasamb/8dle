@@ -62,6 +62,14 @@ export function Round4({ gameState }: { gameState: GameState }) {
         audio.removeEventListener("ended", () => setPlaying(false));
       };
     }, []);
+
+    useEffect(() => {
+      return () => {
+        audio.pause();
+        setPlaying(false);
+      };
+    }, []);
+
     return [playing, toggle];
   };
   const [playing, toggle] = useAudio();

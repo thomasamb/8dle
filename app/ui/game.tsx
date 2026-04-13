@@ -37,28 +37,27 @@ function GameHeader() {
 function GameEndModal({ gameState }: { gameState: GameState }) {
   const [hidden, setHidden] = useState(false);
   const show = (gameState.won || gameState.lost) && !hidden;
-
+  let modalBodyTextWin =  `You guessed it in ${gameState.guesses} guess${gameState.guesses === 1 ? "" : "es"}!`;
   let modalHeaderText = "";
-  let modalBodyText = "";
   if (gameState.won) {
     modalHeaderText = `You guessed it! The track was ${gameState.answer.trackName}.`;
-    modalBodyText = `You guessed it in ${gameState.guesses} guess${gameState.guesses === 1 ? "" : "es"}!`;
   } else if (gameState.lost) {
     modalHeaderText = `You lost. The track was ${gameState.answer.trackName}.`;
   }
 
   return (
-    <Modal show={show} onHide={() => setHidden(true)}>
+    <Modal dialogClassName="gameEndModalDialog" id="gameEndModal" show={show} onHide={() => setHidden(true)}>
       <Modal.Header closeButton>
         <Modal.Title>{modalHeaderText}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <p>{modalBodyText}</p>
+      <Modal.Body className="gameEndModalBody">
+        {gameState.won && (<p>{modalBodyTextWin}</p>)}
         <Image
           src={gameState.answer.trackMainImagePath}
           alt={gameState.answer.trackName}
           height={100}
           width={100}
+          className="modalTrackImage"
         />
       </Modal.Body>
     </Modal>

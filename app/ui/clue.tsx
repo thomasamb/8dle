@@ -23,7 +23,7 @@ export default function Clue({ gameState }: { gameState: GameState }) {
 
   return (
     <div id="cluesContainer">
-      {roundPageMapping[page]}
+      <div id="clueDisplay">{roundPageMapping[page]}</div>
       <div id="cluesPagination">
         <Pagination>
           {pages.map((p) => (

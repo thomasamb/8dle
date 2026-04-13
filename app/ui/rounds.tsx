@@ -41,7 +41,6 @@ export function Round3({ gameState }: { gameState: GameState }): ReactNode {
         quality={100}
         height={100}
         width={100}
-        sizes="(max-width: 768px) 95vw, 800px"
         className="trackScreenshotImage"
       />
     </div>

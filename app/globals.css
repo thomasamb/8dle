@@ -1,6 +1,6 @@
 /* Layout */
 :root {
-  --max-width: 600px;
+  --max-width: 800px;
   --spacing-sm: 0.5rem;
   --spacing-xsm: 0.3rem;
   --spacing-md: 1rem;
@@ -68,12 +68,13 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: 0 var(--spacing-sm)
+  gap: var(--spacing-lg);
+  padding: 0 var(--spacing-sm);
 }
 
 #gameHeader {
   width: 100%;
+  max-width: var(--max-width);
   text-align: center;
 }
 
@@ -89,6 +90,7 @@ main {
 /* Search */
 #searchContainer {
   width: 100%;
+  max-width: var(--max-width);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
@@ -106,7 +108,7 @@ main {
 /* Clues */
 #cluesContainer {
   max-width: 800px;
-  width: min(95vw, 500px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,16 +126,15 @@ main {
   overflow: hidden;
 }
 
-
 .trackLayoutImage {
   width: clamp(100px, 60vw, 300px);
   height: auto;
 }
 
 .trackScreenshotImage {
-  width: clamp(200px, 100vw, 500px);
+  width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .cupImage {

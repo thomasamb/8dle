@@ -21,8 +21,8 @@ export default function Share({ gameState }: { gameState: GameState }) {
   const shareText = `
   1. ${getRoundResult(1)}
   2. ${getRoundResult(2)}
-  3.${getRoundResult(3)}
-  4.${getRoundResult(4)}
+  3. ${getRoundResult(3)}
+  4. ${getRoundResult(4)}
   Play on ${websiteUrl}`;
   return (
     <div id="shareContainer">
@@ -33,7 +33,10 @@ export default function Share({ gameState }: { gameState: GameState }) {
         }}
         onClick={() => console.log("Share")}
       >
-        <Button variant="primary">Share Results</Button>
+        <Button variant="primary">
+          Share Results
+          <SlShareAlt id="share-icon" />
+        </Button>
       </RWebShare>
     </div>
   );

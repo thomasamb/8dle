@@ -265,3 +265,11 @@ main {
   align-items: center;
   gap: var(--spacing-sm);
 }
+
+/* Share */
+#shareContainer .btn-primary {
+  margin-top: 5px;
+  background-color: var(--blue-color);
+  border-color: var(--blue-color);
+  color: #0a0a1a;
+}

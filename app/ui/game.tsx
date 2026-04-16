@@ -7,6 +7,7 @@ import GameHandler from "../lib/gameHandler";
 import { Modal } from "react-bootstrap";
 import Image from "next/image";
 import RoundTracker from "./roundTracker";
+import Share from "./share";
 
 export default function Game() {
   const [gameHandler, setGameHandler] = useState(new GameHandler());
@@ -23,6 +24,7 @@ export default function Game() {
           gameHandler={gameHandler}
         />
       )}
+      {(gameState.won || gameState.lost) && <Share gameState={gameState} />}
       <GameEndModal gameState={gameState} />
     </div>
   );
@@ -73,7 +75,9 @@ function GameEndModal({ gameState }: { gameState: GameState }) {
           height={100}
           width={100}
           className="modalTrackImage"
+          unoptimized
         />
+        <Share gameState={gameState} />
       </Modal.Body>
     </Modal>
   );

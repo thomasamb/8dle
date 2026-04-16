@@ -272,4 +272,11 @@ main {
   background-color: var(--blue-color);
   border-color: var(--blue-color);
   color: #0a0a1a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#shareContainer svg {
+  display: flex;
 }

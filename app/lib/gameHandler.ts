@@ -1,6 +1,4 @@
 import GameState from "./gameState";
-import { Answer } from "./answer";
-import { answerSet } from "./answerSet";
 import generateAnswer from "./generateAnswer";
 
 export default class GameHandler {
@@ -23,7 +21,7 @@ export default class GameHandler {
     if (guess === newGameState.answer.trackName) {
       newGameState.won = true;
     } else {
-      if (newGameState.guesses >= 4) {
+      if (newGameState.guesses >= 5) {
         newGameState.lost = true;
       } else {
         newGameState.round++;

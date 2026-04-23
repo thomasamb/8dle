@@ -6,13 +6,14 @@ export default function RoundTracker({ gameState }: { gameState: GameState }) {
   const filledHeart = <FaHeart />;
   const emptyHeart = <FaRegHeart />;
   const heart = (idx: number) => {
-    if (idx < gameState.round) {
+    if (idx < gameState.round || gameState.lost) {
       return emptyHeart;
     }
     return filledHeart;
   };
   return (
     <div id="roundTracker" className="d-flex gap-2">
+      <span>{heart(5)}</span>
       <span>{heart(4)}</span>
       <span>{heart(3)}</span>
       <span>{heart(2)}</span>

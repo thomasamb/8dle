@@ -11,6 +11,8 @@ export function Round1({ gameState }: { gameState: GameState }): ReactNode {
         alt="Track layout"
         height={100}
         width={100}
+        quality={100}
+        unoptimized
         className="trackLayoutImage"
       />
     </div>
@@ -20,6 +22,20 @@ export function Round1({ gameState }: { gameState: GameState }): ReactNode {
 export function Round2({ gameState }: { gameState: GameState }): ReactNode {
   return (
     <div id="round2">
+      <Image
+        src={gameState.answer.consolePath}
+        alt={gameState.answer.consoleOrigin}
+        height={100}
+        width={200}
+        className="consoleImage"
+      />
+    </div>
+  );
+}
+
+export function Round3({ gameState }: { gameState: GameState }): ReactNode {
+  return (
+    <div id="round3">
       <Image
         src={gameState.answer.cupImagePath}
         alt={gameState.answer.cup}
@@ -31,9 +47,9 @@ export function Round2({ gameState }: { gameState: GameState }): ReactNode {
   );
 }
 
-export function Round3({ gameState }: { gameState: GameState }): ReactNode {
+export function Round4({ gameState }: { gameState: GameState }): ReactNode {
   return (
-    <div id="round3">
+    <div id="round4">
       <Image
         src={gameState.answer.screenshotPath}
         unoptimized
@@ -47,7 +63,7 @@ export function Round3({ gameState }: { gameState: GameState }): ReactNode {
   );
 }
 
-export function Round4({ gameState }: { gameState: GameState }) {
+export function Round5({ gameState }: { gameState: GameState }) {
   const useAudio = (): [boolean, () => void] => {
     const [audio] = useState(new Audio(gameState.answer.song));
     const [playing, setPlaying] = useState(false);
@@ -77,7 +93,7 @@ export function Round4({ gameState }: { gameState: GameState }) {
   const [playing, toggle] = useAudio();
 
   return (
-    <div id="round4">
+    <div id="round5">
       <Button id="songButton" onClick={toggle}>
         {playing ? "Stop" : "Play"} Song
       </Button>

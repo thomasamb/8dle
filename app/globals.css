@@ -114,7 +114,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
 }
 
 #clueDisplay {
@@ -129,7 +129,9 @@ main {
 }
 
 .trackLayoutImage {
-  width: clamp(100px, 60vw, 300px);
+  width: clamp(100px, 50vw, 400px);
+  max-width: 100%;
+  object-fit: contain;
   height: auto;
 }
 
@@ -139,12 +141,19 @@ main {
   object-fit: cover;
 }
 
+.consoleImage {
+  width: clamp(150px, 70vw, 400px);
+  height: auto;
+}
+
 .cupImage {
   width: clamp(100px, 30vw, 200px);
   height: auto;
 }
 
 #cluesPagination .pagination {
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-sm);
 }
 

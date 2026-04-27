@@ -17,9 +17,10 @@ export default function Search({
   const [input, setInput] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const filtered = answerSet.filter((answer) =>
-    answer.trackName.toLowerCase().includes(input.toLowerCase()),
-  );
+  const filtered = answerSet
+    .filter((answer) =>
+      answer.trackName.toLowerCase().includes(input.toLowerCase()),
+    )
 
   const [state, formAction] = useActionState(
     (previousState: GameState, formData: FormData) => {
@@ -35,7 +36,7 @@ export default function Search({
   return (
     <div id="searchContainer">
       <form action={formAction}>
-        <Dropdown show={showDropdown && input.length > 0}>
+        <Dropdown show={showDropdown && input.length > 0} drop="up">
           <InputGroup className="mb-3">
             <Form.Control
               disabled={gameState.won || gameState.lost}
@@ -58,7 +59,19 @@ export default function Search({
               <SlArrowRightCircle id="guessButtonIcon" />
             </Button>
           </InputGroup>
-          <Dropdown.Menu>
+          <Dropdown.Menu
+            flip
+            popperConfig={{
+              modifiers: [
+                {
+                  name: "preventOverflow",
+                  options: {
+                    boundary: "viewport",
+                  },
+                },
+              ],
+            }}
+          >
             {filtered.map((answer) => (
               <Dropdown.Item
                 key={answer.trackName}

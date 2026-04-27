@@ -13,7 +13,9 @@
 
 body {
   min-height: 100vh;
+  max-height: 100vh;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   align-items: center;
 }
@@ -107,6 +109,12 @@ main {
   border-color: var(--blue-color);
 }
 
+#searchContainer .dropdown-menu {
+  width: 35vh;
+  max-height: 20vh !important;
+  overflow-y: scroll !important;
+}
+
 /* Clues */
 #cluesContainer {
   max-width: 800px;
@@ -115,6 +123,12 @@ main {
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  #clueDisplay {
+    max-height: 350px;
+  }
 }
 
 #clueDisplay {

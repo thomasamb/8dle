@@ -12,15 +12,15 @@ export default function Clue({ gameState }: { gameState: GameState }) {
     { key: "Layout", round: 1 },
     { key: "Console", round: 2 },
     { key: "Cup", round: 3 },
-    { key: "Screenshot", round: 4 },
-    { key: "Music", round: 5 },
+    { key: "Music", round: 4 },
+    { key: "Screenshot", round: 5 },
   ];
   /*
   Round 1: Layout
   Round 2: Console
   Round 3: Cup
-  Round 4: Screenshot
-  Round 5: Music
+  Round 4: Music
+  Round 5: Screenshot
   */
   const roundPageMapping = {
     1: <Round1 gameState={gameState} />,

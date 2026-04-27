@@ -47,23 +47,7 @@ export function Round3({ gameState }: { gameState: GameState }): ReactNode {
   );
 }
 
-export function Round4({ gameState }: { gameState: GameState }): ReactNode {
-  return (
-    <div id="round4">
-      <Image
-        src={gameState.answer.screenshotPath}
-        unoptimized
-        alt="Track screenshot"
-        quality={100}
-        height={100}
-        width={100}
-        className="trackScreenshotImage"
-      />
-    </div>
-  );
-}
-
-export function Round5({ gameState }: { gameState: GameState }) {
+export function Round4({ gameState }: { gameState: GameState }) {
   const useAudio = (): [boolean, () => void] => {
     const [audio] = useState(new Audio(gameState.answer.song));
     const [playing, setPlaying] = useState(false);
@@ -93,10 +77,26 @@ export function Round5({ gameState }: { gameState: GameState }) {
   const [playing, toggle] = useAudio();
 
   return (
-    <div id="round5">
+    <div id="round4">
       <Button id="songButton" onClick={toggle}>
         {playing ? "Stop" : "Play"} Song
       </Button>
+    </div>
+  );
+}
+
+export function Round5({ gameState }: { gameState: GameState }): ReactNode {
+  return (
+    <div id="round5">
+      <Image
+        src={gameState.answer.screenshotPath}
+        unoptimized
+        alt="Track screenshot"
+        quality={100}
+        height={100}
+        width={100}
+        className="trackScreenshotImage"
+      />
     </div>
   );
 }

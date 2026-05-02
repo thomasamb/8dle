@@ -156,8 +156,10 @@ main {
 }
 
 .consoleImage {
+  max-width: 50vw;
   width: clamp(150px, 70vw, 400px);
   height: auto;
+  object-fit: contain;
 }
 
 .cupImage {

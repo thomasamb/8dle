@@ -8,6 +8,6 @@ export default function generateAnswer(): Answer {
 }
 
 function getRandomInt(max: number): number {
-  return 5;
+  return 10;
   // return Math.floor(Math.random() * max);```
 }

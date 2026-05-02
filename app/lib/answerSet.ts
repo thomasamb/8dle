@@ -1062,3 +1062,7 @@ export const answerSet: Array<Answer> = [
     consoleOrigin: Console.Wii,
   },
 ];
+
+export const answerMap: Map<string, number> = new Map(
+  answerSet.map((track, i) => [track.trackName, i] as [string, number]),
+);

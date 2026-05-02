@@ -5,6 +5,10 @@ import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
 import { answerSet } from "../lib/answerSet";
 import { SlArrowRightCircle } from "react-icons/sl";
 
+function validateInput(input: string, answerSet: ): boolean {
+  return 
+}
+
 export default function Search({
   gameState,
   setGameState,

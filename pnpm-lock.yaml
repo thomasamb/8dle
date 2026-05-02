@@ -29,9 +29,6 @@ importers:
       react-web-share:
         specifier: ^2.0.2
         version: 2.0.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      zod:
-        specifier: ^4.4.2
-        version: 4.4.2
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4

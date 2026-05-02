@@ -266,7 +266,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Banana/DKJungle/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Banana/DKJungle/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Banana/BananaCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {
@@ -299,7 +299,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Leaf/MusicPark/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Leaf/MusicPark/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Leaf/LeafCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {
@@ -332,7 +332,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Lightning/PiranhaPlantSlide/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Lightning/PiranhaPlantSlide/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Lightning/LightningCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {
@@ -497,7 +497,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Bell/NeoBowserCity/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Bell/NeoBowserCity/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Bell/BellCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {
@@ -552,7 +552,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/GoldenDash/ToadCircuit/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/GoldenDash/ToadCircuit/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/GoldenDash/GoldenDashCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {
@@ -739,7 +739,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Rock/RockRockMountain/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Rock/RockRockMountain/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Rock/RockCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {
@@ -794,7 +794,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Moon/RainbowRoad3DS/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Moon/RainbowRoad3DS/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Moon/MoonCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {
@@ -1036,7 +1036,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Spiny/RosalinasIceWorld/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Spiny/RosalinasIceWorld/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Spiny/SpinyCup.png`,
-    consolePath: `${consolePathPrefix}/N3DS.png`,
+    consolePath: `${consolePathPrefix}/3DS.png`,
     consoleOrigin: Console.N3DS,
   },
   {

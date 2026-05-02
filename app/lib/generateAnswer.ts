@@ -8,6 +8,15 @@ export default function generateAnswer(): Answer {
 }
 
 function getRandomInt(max: number): number {
-  return 18; // 19
+  return 23;
+  /**
+   * 1 - Wii U
+   * 16 - Wii
+   * 17 - GBA
+   * 18 - DS
+   * 19 - N64
+   * 20 - GameCube
+   * 21 - SNES
+   */
   // return Math.floor(Math.random() * max);```
 }

@@ -8,7 +8,7 @@ export default function generateAnswer(): Answer {
 }
 
 function getRandomInt(max: number): number {
-  return 23;
+  return 25;
   /**
    * 1 - Wii U
    * 16 - Wii
@@ -17,6 +17,7 @@ function getRandomInt(max: number): number {
    * 19 - N64
    * 20 - GameCube
    * 21 - SNES
+   * 23 - 3DS
    */
   // return Math.floor(Math.random() * max);```
 }

@@ -15,7 +15,7 @@ export enum Console {
   Switch = "Switch",
   N3DS = "3DS",
   DS = "DS",
-  GBA = "Gamebody Advancece",
+  GBA = "Gameboy Advance",
   N64 = "Nintendo 64",
   SNES = "Super Nintendo Entertainment System",
   GameCube = "GameCube",

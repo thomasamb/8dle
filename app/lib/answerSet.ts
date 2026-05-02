@@ -200,7 +200,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Shell/MarioCircuitGBA/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Shell/MarioCircuitGBA/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Shell/ShellCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {
@@ -464,7 +464,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Crossing/CheeseLand/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Crossing/CheeseLand/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Crossing/CrossingCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {
@@ -508,7 +508,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Bell/RibbonRoad/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Bell/RibbonRoad/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Bell/BellCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {
@@ -607,7 +607,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/LuckyCat/SkyGarden/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/LuckyCat/SkyGarden/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/LuckyCat/LuckyCatCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {
@@ -684,7 +684,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Propeller/SnowLand/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Propeller/SnowLand/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Propeller/PropellerCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {
@@ -728,7 +728,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Rock/BooLake/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Rock/BooLake/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Rock/RockCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {
@@ -816,7 +816,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Fruit/RiversidePark/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Fruit/RiversidePark/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Fruit/FruitCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {
@@ -948,7 +948,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Cherry/SunsetWilds/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Cherry/SunsetWilds/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Cherry/CherryCup.png`,
-    consolePath: `${consolePathPrefix}/GBA.png`,
+    consolePath: `${consolePathPrefix}/GameBoyAdvance.png`,
     consoleOrigin: Console.GBA,
   },
   {

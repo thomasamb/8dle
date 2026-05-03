@@ -127,7 +127,8 @@ main {
 
 @media (min-width: 768px) {
   #clueDisplay {
-    max-height: 350px;
+    /* max-height: 40vw; */
+    max-height: 380px;
   }
 }
 

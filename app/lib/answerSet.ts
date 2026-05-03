@@ -656,7 +656,7 @@ export const answerSet: Array<Answer> = [
   },
   {
     trackName: "Waluigi Pinball",
-    song: "https://www.mariowiki.com/images/0/0e/MK8DX-CourseIntro_WaluigiPinball.oga?779a4",
+    song: "https://www.mariowiki.com/images/2/2e/MK8-Music-DS-WarioStadium.oga?b6e7d",
     trackLayoutPath: `${cupPathPrefix}/Turnip/WaluigiPinball/map.png`,
     cup: "Turnip Cup",
     screenshotPath: `${cupPathPrefix}/Turnip/WaluigiPinball/screenshot.png`,

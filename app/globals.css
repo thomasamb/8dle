@@ -145,6 +145,7 @@ main {
 
 .trackLayoutImage {
   width: clamp(100px, 50vw, 400px);
+  max-height: 350px;
   max-width: 100%;
   object-fit: contain;
   height: auto;

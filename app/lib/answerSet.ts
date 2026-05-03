@@ -766,7 +766,7 @@ export const answerSet: Array<Answer> = [
   },
   {
     trackName: "Peach Gardens",
-    song: "https://www.mariowiki.com/images/9/95/Switch_Tour_BerlinByways_BCP.oga?f245b",
+    song: "https://www.mariowiki.com/images/a/a0/Switch_DS_PeachGardens_BCP.oga?b1280",
     trackLayoutPath: `${cupPathPrefix}/Moon/PeachGardens/map.png`,
     cup: "Moon Cup",
     screenshotPath: `${cupPathPrefix}/Moon/PeachGardens/screenshot.png`,

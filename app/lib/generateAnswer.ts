@@ -8,7 +8,6 @@ export default function generateAnswer(): Answer {
 }
 
 function getRandomInt(max: number): number {
-  return 92;
   /**
    * 1 - Wii U
    * 16 - Wii
@@ -21,5 +20,5 @@ function getRandomInt(max: number): number {
    * 48 - Tour
    * 63 - Switch
    */
-  // return Math.floor(Math.random() * max);```
+  return Math.floor(Math.random() * max);
 }

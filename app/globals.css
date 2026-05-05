@@ -91,6 +91,16 @@ main {
   color: var(--blue-color);
 }
 
+#buttonIcons {
+  color: var(--blue-color);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 /* Search */
 #searchContainer {
   width: 100%;

@@ -8,12 +8,24 @@ import { Modal } from "react-bootstrap";
 import Image from "next/image";
 import RoundTracker from "./roundTracker";
 import Share from "./share";
+import { PiInfoFill } from "react-icons/pi";
+import { IoIosStats } from "react-icons/io";
+import InfoModal from "./info";
+import StatsModal from "./stats";
 
 export default function Game() {
   const [gameHandler, setGameHandler] = useState(new GameHandler());
   const [gameState, setGameState] = useState(gameHandler.gameState);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showStatsModal, setShowStatsModal] = useState(false);
   return (
     <div id="game">
+      <div id="buttonIcons">
+        <PiInfoFill onClick={() => setShowInfoModal(!showInfoModal)} />
+        <IoIosStats onClick={() => setShowStatsModal(!showStatsModal)} />
+      </div>
+      {InfoModal(showInfoModal, () => setShowInfoModal(showInfoModal))}
+      {StatsModal(showStatsModal)}
       <GameHeader gameState={gameState} />
       <RoundTracker gameState={gameState} />
       <Clue gameState={gameState} />

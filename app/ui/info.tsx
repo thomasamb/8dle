@@ -1,10 +1,13 @@
 import { ReactNode } from "react";
 import { Modal } from "react-bootstrap";
 
-export default function InfoModal(
-  showModal: boolean,
-  onHide: () => void,
-): ReactNode {
+export default function InfoModal({
+  showModal,
+  onHide,
+}: {
+  showModal: boolean;
+  onHide: () => void;
+}): ReactNode {
   return (
     <div id="infoContainer">
       <Modal
@@ -12,7 +15,14 @@ export default function InfoModal(
         id="infoModal"
         show={showModal}
         onHide={onHide}
-      ></Modal>
+      >
+        <Modal.Header closeButton>
+          <p>Hello</p>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Hi</p>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

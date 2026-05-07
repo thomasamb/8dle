@@ -20,12 +20,18 @@ export default function Game() {
   const [showStatsModal, setShowStatsModal] = useState(false);
   return (
     <div id="game">
+      <InfoModal
+        showModal={showInfoModal}
+        onHide={() => setShowInfoModal(!showInfoModal)}
+      />
+      <StatsModal
+        showModal={showStatsModal}
+        onHide={() => setShowStatsModal(!showStatsModal)}
+      />
       <div id="buttonIcons">
         <PiInfoFill onClick={() => setShowInfoModal(!showInfoModal)} />
         <IoIosStats onClick={() => setShowStatsModal(!showStatsModal)} />
       </div>
-      {InfoModal(showInfoModal, () => setShowInfoModal(showInfoModal))}
-      {StatsModal(showStatsModal)}
       <GameHeader gameState={gameState} />
       <RoundTracker gameState={gameState} />
       <Clue gameState={gameState} />

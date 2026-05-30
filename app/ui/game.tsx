@@ -4,14 +4,14 @@ import GameState from "../lib/gameState";
 import Clue from "./clue";
 import { useState, useEffect } from "react";
 import GameHandler from "../lib/gameHandler";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import Image from "next/image";
 import RoundTracker from "./roundTracker";
 import Share from "./share";
 import { PiInfoFill } from "react-icons/pi";
 import { IoIosStats } from "react-icons/io";
-import InfoModal from "./info";
-import StatsModal from "./stats";
+import InfoModal from "./infoModal";
+import StatsModal from "./statsModal";
 import { Stats, Result } from "../lib/stats";
 
 export default function Game() {
@@ -100,7 +100,22 @@ export default function Game() {
         totalGuesses: prev.totalGuesses + gameState.guesses,
       }));
     }
+    localStorage.setItem("stats", JSON.stringify(stats));
   }, [gameState]);
+
+  function onDelete() {
+    setStats({
+      winStreak: 0,
+      wins: 0,
+      losses: 0,
+      winPct: 0,
+      history: [],
+      avgGuesses: 0,
+      gamesPlayed: 0,
+      totalGuesses: 0,
+    });
+    localStorage.setItem("stats", JSON.stringify(stats));
+  }
 
   return (
     <div id="game">
@@ -111,9 +126,16 @@ export default function Game() {
       <StatsModal
         showModal={showStatsModal}
         onHide={() => setShowStatsModal(!showStatsModal)}
+        stats={stats}
+        onDelete={onDelete}
       />
       <div id="buttonIcons">
         <PiInfoFill onClick={() => setShowInfoModal(!showInfoModal)} />
+        <Button
+          onClick={() => {
+            console.log(localStorage.getItem("stats"));
+          }}
+        ></Button>
         <IoIosStats onClick={() => setShowStatsModal(!showStatsModal)} />
       </div>
       <GameHeader gameState={gameState} />

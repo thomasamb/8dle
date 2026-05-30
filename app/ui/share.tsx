@@ -4,15 +4,15 @@ import { Button } from "react-bootstrap";
 import { SlShareAlt } from "react-icons/sl";
 
 export default function Share({ gameState }: { gameState: GameState }) {
-  const websiteUrl = "https://8dle.io";
+  const websiteUrl = "https://8dle.app";
   function getRoundResult(round: number) {
     if (gameState.lost) {
       return `❌`;
     } else {
       if (gameState.round == round) {
-        return `✅`;
+        return `✔️`;
       } else if (round > gameState.round) {
-        return "-";
+        return `➖`;
       } else {
         return `❌`;
       }
@@ -23,6 +23,7 @@ export default function Share({ gameState }: { gameState: GameState }) {
   2. ${getRoundResult(2)}
   3. ${getRoundResult(3)}
   4. ${getRoundResult(4)}
+  5. ${getRoundResult(5)}
   Play on ${websiteUrl}`;
   return (
     <div id="shareContainer">

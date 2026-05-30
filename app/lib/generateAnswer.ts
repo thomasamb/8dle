@@ -20,5 +20,6 @@ function getRandomInt(max: number): number {
    * 48 - Tour
    * 63 - Switch
    */
-  return Math.floor(Math.random() * max);
+    return 10;
+  // return Math.floor(Math.random() * max);
 }

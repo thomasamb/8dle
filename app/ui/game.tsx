@@ -2,7 +2,7 @@
 import Search from "./search";
 import GameState from "../lib/gameState";
 import Clue from "./clue";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GameHandler from "../lib/gameHandler";
 import { Modal } from "react-bootstrap";
 import Image from "next/image";
@@ -12,12 +12,96 @@ import { PiInfoFill } from "react-icons/pi";
 import { IoIosStats } from "react-icons/io";
 import InfoModal from "./info";
 import StatsModal from "./stats";
+import { Stats, Result } from "../lib/stats";
 
 export default function Game() {
+  const numRounds = 5;
   const [gameHandler, setGameHandler] = useState(new GameHandler());
   const [gameState, setGameState] = useState(gameHandler.gameState);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
+  const [stats, setStats] = useState<Stats>({
+    winStreak: 0,
+    wins: 0,
+    losses: 0,
+    winPct: 0,
+    history: [],
+    avgGuesses: 0,
+    gamesPlayed: 0,
+    totalGuesses: 0,
+  });
+
+  const updateGuessHistory = (prev: Stats) => {
+    const oldHistory = prev.history;
+    if (gameState.lost) {
+      oldHistory.push([
+        Result.Wrong,
+        Result.Wrong,
+        Result.Wrong,
+        Result.Wrong,
+        Result.Wrong,
+      ]);
+    } else if (gameState.won) {
+      const gameResults = [];
+      for (let i = 0; i < numRounds; i++) {
+        if (i + 1 == gameState.round) {
+          gameResults.push(Result.Right);
+        } else if (i + 1 > gameState.round) {
+          gameResults.push(Result.NA);
+        } else {
+          gameResults.push(Result.Wrong);
+        }
+      }
+      oldHistory.push(gameResults);
+    }
+    return oldHistory;
+  };
+
+  const updateAverageGuesses = (prev: Stats): Number => {
+    const totalGuesses = prev.totalGuesses + gameState.guesses;
+    const gamesPlayed = prev.gamesPlayed + 1;
+    return Number((totalGuesses / gamesPlayed).toFixed(2));
+  };
+
+  useEffect(() => {
+    const statsFetch = localStorage.getItem("stats");
+    if (statsFetch) {
+      try {
+        setStats(JSON.parse(statsFetch) as Stats);
+      } catch (error) {
+        console.error("Failed to parse stats from localStorage", error);
+      }
+    } else {
+      localStorage.setItem("stats", JSON.stringify(stats));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (gameState.won) {
+      setStats((prev) => ({
+        ...prev,
+        winStreak: prev.winStreak + 1,
+        wins: prev.wins + 1,
+        gamesPlayed: prev.gamesPlayed + 1,
+        winPct: Number(((prev.wins + 1) / prev.losses).toFixed(2)),
+        history: updateGuessHistory(prev),
+        avgGuesses: updateAverageGuesses(prev),
+        totalGuesses: prev.totalGuesses + gameState.guesses,
+      }));
+    } else if (gameState.lost) {
+      setStats((prev) => ({
+        ...prev,
+        winStreak: 0,
+        losses: prev.losses + 1,
+        gamesPlayed: prev.gamesPlayed + 1,
+        winPct: Number((prev.wins / prev.losses + 1).toFixed(2)),
+        history: updateGuessHistory(prev),
+        avgGuesses: updateAverageGuesses(prev),
+        totalGuesses: prev.totalGuesses + gameState.guesses,
+      }));
+    }
+  }, [gameState]);
+
   return (
     <div id="game">
       <InfoModal

@@ -17,18 +17,20 @@ export default function StatsModal({
 }): ReactNode {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   return (
-    <div id="statsContainer">
+    <div id={showDeleteModal ? "darkOverlay" : ""}>
       <DeleteModal
         onHide={() => setShowDeleteModal(false)}
         onDelete={onDelete}
         showModal={showDeleteModal}
       />
       <Modal
+        style={showDeleteModal ? { opacity: 0.5 } : {}}
         dialogClassName="statsModalDialog"
         id="statsModal"
         show={showModal}
         onHide={onHide}
         scrollable={true}
+        className={showDeleteModal ? "darkOverlay" : ""}
       >
         <Modal.Header closeButton>
           <p>Stats</p>
@@ -71,8 +73,8 @@ function GameLog({ stats }: { stats: Stats }): ReactNode {
     <div id="history">
       <p>Game Logs</p>
       <ul>
-        {stats.history.map((log) => (
-          <li>{constructLog(log)}</li>
+        {stats.history.map((log, index) => (
+          <li key={index}>{constructLog(log)}</li>
         ))}
       </ul>
     </div>
@@ -95,6 +97,7 @@ function DeleteModal({
         id="deleteModal"
         show={showModal}
         onHide={onHide}
+        backdrop={true}
       >
         <Modal.Header closeButton>
           <p>Delete Stats</p>

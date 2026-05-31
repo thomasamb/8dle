@@ -47,12 +47,6 @@ export default function Game() {
     return blankStats;
   });
 
-  const updateAverageGuesses = (prev: Stats): Number => {
-    const totalGuesses = prev.totalGuesses + gameState.guesses;
-    const gamesPlayed = prev.gamesPlayed + 1;
-    return Number((totalGuesses / gamesPlayed).toFixed(2));
-  };
-
   useEffect(() => {
     localStorage.setItem("stats", JSON.stringify(stats));
   }, [stats]);
@@ -80,7 +74,7 @@ export default function Game() {
             winStreak: prev.winStreak + 1,
             wins: prev.wins + 1,
             gamesPlayed: newGamesPlayed,
-            winPct: Number(((prev.wins + 1) / newGamesPlayed).toFixed(2)),
+            winPct: Number((((prev.wins + 1) / newGamesPlayed) * 100).toFixed(2)),
             history: newHistory,
             avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
             totalGuesses: newTotalGuesses,
@@ -105,7 +99,7 @@ export default function Game() {
             winStreak: 0,
             losses: prev.losses + 1,
             gamesPlayed: newGamesPlayed,
-            winPct: Number((prev.wins / newGamesPlayed).toFixed(2)),
+            winPct: Number((prev.wins / newGamesPlayed).toFixed(2)) * 100,
             history: newHistory,
             avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
             totalGuesses: newTotalGuesses,

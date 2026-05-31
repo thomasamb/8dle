@@ -26,14 +26,13 @@ export default function StatsModal({
       <Modal
         style={showDeleteModal ? { opacity: 0.5 } : {}}
         dialogClassName="statsModalDialog"
-        id="statsModal"
         show={showModal}
         onHide={onHide}
         scrollable={true}
         className={showDeleteModal ? "darkOverlay" : ""}
       >
         <Modal.Header closeButton>
-          <p>Stats</p>
+          <h1>Stats</h1>
         </Modal.Header>
         <Modal.Body>
           <p>Total Games: {stats.gamesPlayed}</p>

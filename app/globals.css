@@ -320,6 +320,18 @@ main {
 }
 
 /* Stats Modal */
-#statsModal {
-  max-height: 80%;
+.statsModalDialog {
+  max-height: 78%;
+}
+
+.statsModalDialog .modal-header {
+  display: flex;
+  align-items: center;
+}
+
+.statsModalDialog .modal-header h1 {
+  color: var(--blue-color);
+  flex: 1;
+  text-align: center;
+  margin: 0;
 }

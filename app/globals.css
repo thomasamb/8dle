@@ -318,3 +318,8 @@ main {
 #shareContainer svg {
   display: flex;
 }
+
+/* Stats Modal */
+#statsModal {
+  max-height: 80%;
+}

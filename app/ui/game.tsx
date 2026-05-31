@@ -47,34 +47,6 @@ export default function Game() {
     return blankStats;
   });
 
-  const updateGuessHistory = (prev: Stats) => {
-    console.log("here");
-    const oldHistory = prev.history;
-    if (gameState.lost) {
-      oldHistory.push([
-        Result.Wrong,
-        Result.Wrong,
-        Result.Wrong,
-        Result.Wrong,
-        Result.Wrong,
-      ]);
-    } else if (gameState.won) {
-      const gameResults = [];
-      for (let i = 0; i < numRounds; i++) {
-        if (i + 1 == gameState.round) {
-          gameResults.push(Result.Right);
-        } else if (i + 1 > gameState.round) {
-          gameResults.push(Result.NA);
-        } else {
-          console.log(`i: ${i}, i+1: ${i + 1}`);
-          gameResults.push(Result.Wrong);
-        }
-      }
-      oldHistory.push(gameResults);
-    }
-    return oldHistory;
-  };
-
   const updateAverageGuesses = (prev: Stats): Number => {
     const totalGuesses = prev.totalGuesses + gameState.guesses;
     const gamesPlayed = prev.gamesPlayed + 1;
@@ -86,34 +58,59 @@ export default function Game() {
   }, [stats]);
 
   useEffect(() => {
-    console.log("stats update useEffect entered");
     if ((gameState.won || gameState.lost) && !statsUpdated) {
       setStatsUpdated(true);
-      console.log("Proceeding with stats update");
       if (gameState.won) {
-        console.log("game.won");
-        setStats((prev) => ({
-          ...prev,
-          winStreak: prev.winStreak + 1,
-          wins: prev.wins + 1,
-          gamesPlayed: prev.gamesPlayed + 1,
-          winPct: Number(((prev.wins + 1) / prev.gamesPlayed + 1).toFixed(2)),
-          history: updateGuessHistory(prev),
-          avgGuesses: updateAverageGuesses(prev),
-          totalGuesses: prev.totalGuesses + gameState.guesses,
-        }));
+        setStats((prev) => {
+          const gameResults = [];
+          for (let i = 0; i < numRounds; i++) {
+            if (i + 1 === gameState.round) {
+              gameResults.push(Result.Right);
+            } else if (i + 1 > gameState.round) {
+              gameResults.push(Result.NA);
+            } else {
+              gameResults.push(Result.Wrong);
+            }
+          }
+          const newHistory = [...prev.history, gameResults];
+          const newGamesPlayed = prev.gamesPlayed + 1;
+          const newTotalGuesses = prev.totalGuesses + gameState.guesses;
+          return {
+            ...prev,
+            winStreak: prev.winStreak + 1,
+            wins: prev.wins + 1,
+            gamesPlayed: newGamesPlayed,
+            winPct: Number(((prev.wins + 1) / newGamesPlayed).toFixed(2)),
+            history: newHistory,
+            avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
+            totalGuesses: newTotalGuesses,
+          };
+        });
       } else if (gameState.lost) {
-        console.log("game.lost");
-        setStats((prev) => ({
-          ...prev,
-          winStreak: 0,
-          losses: prev.losses + 1,
-          gamesPlayed: prev.gamesPlayed + 1,
-          winPct: Number((prev.wins / (prev.gamesPlayed + 1)).toFixed(2)),
-          history: updateGuessHistory(prev),
-          avgGuesses: updateAverageGuesses(prev),
-          totalGuesses: prev.totalGuesses + gameState.guesses,
-        }));
+        setStats((prev) => {
+          const newHistory = [
+            ...prev.history,
+            [
+              Result.Wrong,
+              Result.Wrong,
+              Result.Wrong,
+              Result.Wrong,
+              Result.Wrong,
+            ],
+          ];
+          const newGamesPlayed = prev.gamesPlayed + 1;
+          const newTotalGuesses = prev.totalGuesses + gameState.guesses;
+          return {
+            ...prev,
+            winStreak: 0,
+            losses: prev.losses + 1,
+            gamesPlayed: newGamesPlayed,
+            winPct: Number((prev.wins / newGamesPlayed).toFixed(2)),
+            history: newHistory,
+            avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
+            totalGuesses: newTotalGuesses,
+          };
+        });
       }
     }
   }, [gameState.won, gameState.lost]);

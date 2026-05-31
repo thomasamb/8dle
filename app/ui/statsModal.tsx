@@ -55,8 +55,6 @@ function GameLog({ stats }: { stats: Stats }): ReactNode {
   const constructLog = (stat: Array<Result>): string => {
     let emojiArray = [];
     for (let i = 0; i < stat.length; i++) {
-      console.log(stat[i]);
-      console.log(typeof(stat[i]));
       switch (stat[i]) {
         case Result.Right:
           emojiArray.push(`✔️`);

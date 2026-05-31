@@ -48,6 +48,7 @@ export default function Game() {
   });
 
   const updateGuessHistory = (prev: Stats) => {
+    console.log("here");
     const oldHistory = prev.history;
     if (gameState.lost) {
       oldHistory.push([
@@ -65,6 +66,7 @@ export default function Game() {
         } else if (i + 1 > gameState.round) {
           gameResults.push(Result.NA);
         } else {
+          console.log(`i: ${i}, i+1: ${i + 1}`);
           gameResults.push(Result.Wrong);
         }
       }
@@ -84,26 +86,30 @@ export default function Game() {
   }, [stats]);
 
   useEffect(() => {
+    console.log("stats update useEffect entered");
     if ((gameState.won || gameState.lost) && !statsUpdated) {
       setStatsUpdated(true);
+      console.log("Proceeding with stats update");
       if (gameState.won) {
+        console.log("game.won");
         setStats((prev) => ({
           ...prev,
           winStreak: prev.winStreak + 1,
           wins: prev.wins + 1,
           gamesPlayed: prev.gamesPlayed + 1,
-          winPct: Number(((prev.wins + 1) / prev.losses).toFixed(2)),
+          winPct: Number(((prev.wins + 1) / prev.gamesPlayed + 1).toFixed(2)),
           history: updateGuessHistory(prev),
           avgGuesses: updateAverageGuesses(prev),
           totalGuesses: prev.totalGuesses + gameState.guesses,
         }));
       } else if (gameState.lost) {
+        console.log("game.lost");
         setStats((prev) => ({
           ...prev,
           winStreak: 0,
           losses: prev.losses + 1,
           gamesPlayed: prev.gamesPlayed + 1,
-          winPct: Number((prev.wins / prev.losses + 1).toFixed(2)),
+          winPct: Number((prev.wins / (prev.gamesPlayed + 1)).toFixed(2)),
           history: updateGuessHistory(prev),
           avgGuesses: updateAverageGuesses(prev),
           totalGuesses: prev.totalGuesses + gameState.guesses,

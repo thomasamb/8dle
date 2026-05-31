@@ -2,7 +2,7 @@
 import Search from "./search";
 import GameState from "../lib/gameState";
 import Clue from "./clue";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import GameHandler from "../lib/gameHandler";
 import { Button, Modal } from "react-bootstrap";
 import Image from "next/image";
@@ -20,7 +20,8 @@ export default function Game() {
   const [gameState, setGameState] = useState(gameHandler.gameState);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
-  const [stats, setStats] = useState<Stats>({
+  const [statsUpdated, setStatsUpdated] = useState(false);
+  const blankStats = {
     winStreak: 0,
     wins: 0,
     losses: 0,
@@ -29,6 +30,21 @@ export default function Game() {
     avgGuesses: 0,
     gamesPlayed: 0,
     totalGuesses: 0,
+  };
+
+  const [stats, setStats] = useState<Stats>(() => {
+    if (typeof window === "undefined") {
+      return blankStats;
+    }
+    const statsFetch = localStorage.getItem("stats");
+    if (statsFetch) {
+      try {
+        return JSON.parse(statsFetch) as Stats;
+      } catch (error) {
+        console.error("Failed to parse stats from localStorage", error);
+      }
+    }
+    return blankStats;
   });
 
   const updateGuessHistory = (prev: Stats) => {
@@ -64,44 +80,37 @@ export default function Game() {
   };
 
   useEffect(() => {
-    const statsFetch = localStorage.getItem("stats");
-    if (statsFetch) {
-      try {
-        setStats(JSON.parse(statsFetch) as Stats);
-      } catch (error) {
-        console.error("Failed to parse stats from localStorage", error);
-      }
-    } else {
-      localStorage.setItem("stats", JSON.stringify(stats));
-    }
-  }, []);
+    localStorage.setItem("stats", JSON.stringify(stats));
+  }, [stats]);
 
   useEffect(() => {
-    if (gameState.won) {
-      setStats((prev) => ({
-        ...prev,
-        winStreak: prev.winStreak + 1,
-        wins: prev.wins + 1,
-        gamesPlayed: prev.gamesPlayed + 1,
-        winPct: Number(((prev.wins + 1) / prev.losses).toFixed(2)),
-        history: updateGuessHistory(prev),
-        avgGuesses: updateAverageGuesses(prev),
-        totalGuesses: prev.totalGuesses + gameState.guesses,
-      }));
-    } else if (gameState.lost) {
-      setStats((prev) => ({
-        ...prev,
-        winStreak: 0,
-        losses: prev.losses + 1,
-        gamesPlayed: prev.gamesPlayed + 1,
-        winPct: Number((prev.wins / prev.losses + 1).toFixed(2)),
-        history: updateGuessHistory(prev),
-        avgGuesses: updateAverageGuesses(prev),
-        totalGuesses: prev.totalGuesses + gameState.guesses,
-      }));
+    if ((gameState.won || gameState.lost) && !statsUpdated) {
+      setStatsUpdated(true);
+      if (gameState.won) {
+        setStats((prev) => ({
+          ...prev,
+          winStreak: prev.winStreak + 1,
+          wins: prev.wins + 1,
+          gamesPlayed: prev.gamesPlayed + 1,
+          winPct: Number(((prev.wins + 1) / prev.losses).toFixed(2)),
+          history: updateGuessHistory(prev),
+          avgGuesses: updateAverageGuesses(prev),
+          totalGuesses: prev.totalGuesses + gameState.guesses,
+        }));
+      } else if (gameState.lost) {
+        setStats((prev) => ({
+          ...prev,
+          winStreak: 0,
+          losses: prev.losses + 1,
+          gamesPlayed: prev.gamesPlayed + 1,
+          winPct: Number((prev.wins / prev.losses + 1).toFixed(2)),
+          history: updateGuessHistory(prev),
+          avgGuesses: updateAverageGuesses(prev),
+          totalGuesses: prev.totalGuesses + gameState.guesses,
+        }));
+      }
     }
-    localStorage.setItem("stats", JSON.stringify(stats));
-  }, [gameState]);
+  }, [gameState.won, gameState.lost]);
 
   function onDelete() {
     setStats({
@@ -114,7 +123,6 @@ export default function Game() {
       gamesPlayed: 0,
       totalGuesses: 0,
     });
-    localStorage.setItem("stats", JSON.stringify(stats));
   }
 
   return (

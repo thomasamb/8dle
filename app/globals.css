@@ -340,6 +340,11 @@ main {
   font-size: clamp(1.0rem, 2.5vw, 1.00rem);
 }
 
+.statsModalBody .btn-danger {
+  display: block;
+  margin-left: auto;
+}
+
 #history p {
   text-align: center;
 }

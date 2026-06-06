@@ -34,7 +34,7 @@ export default function StatsModal({
         <Modal.Header closeButton>
           <h1>Stats</h1>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="statsModalBody">
           <p>Wins: {stats.wins}</p>
           <p>Losses: {stats.losses}</p>
           <p>Win Pct: {String(stats.winPct)}%</p>
@@ -42,7 +42,6 @@ export default function StatsModal({
           <p>Total Games: {stats.gamesPlayed}</p>
           <GameLog stats={stats} />
           <Button
-            id="deleteButton"
             variant="danger"
             onClick={() => setShowDeleteModal(true)}
           >

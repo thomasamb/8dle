@@ -359,3 +359,17 @@ main {
 .deleteModalDialog .modal-body p {
   font-size: clamp(1.0rem, 2.5vw, 1.00rem);
 }
+
+.deleteModalBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.deleteModalDialog .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}

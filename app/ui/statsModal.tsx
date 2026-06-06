@@ -41,7 +41,11 @@ export default function StatsModal({
           <p>Average Guesses: {String(stats.avgGuesses)}</p>
           <p>Total Games: {stats.gamesPlayed}</p>
           <GameLog stats={stats} />
-          <Button variant="danger" onClick={() => setShowDeleteModal(true)}>
+          <Button
+            id="deleteButton"
+            variant="danger"
+            onClick={() => setShowDeleteModal(true)}
+          >
             Reset Stats
           </Button>
         </Modal.Body>

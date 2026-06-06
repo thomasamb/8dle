@@ -29,6 +29,11 @@ main {
   padding: var(--spacing-md);
 }
 
+/* Globals */
+ul {
+  list-style: none;
+}
+
 /* Header */
 #siteHeader {
   height: 10vh;

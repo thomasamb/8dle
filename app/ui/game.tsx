@@ -15,21 +15,31 @@ import StatsModal from "./statsModal";
 import { Stats, Result } from "../lib/stats";
 
 export default function Game() {
+  // TODO: Store gameState in localStorage as well
   const numRounds = 5;
   const [gameHandler, setGameHandler] = useState(new GameHandler());
   const [gameState, setGameState] = useState(gameHandler.gameState);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [statsUpdated, setStatsUpdated] = useState(false);
+  const dateTimeToday = new Date().toLocaleDateString("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const [month, day, year] = dateTimeToday.split("/");
+  const today = new Date(Number(year), Number(month) - 1, Number(day));
   const blankStats = {
     winStreak: 0,
     wins: 0,
     losses: 0,
     winPct: 0,
-    history: [],
+    history: new Map(),
     avgGuesses: 0,
     gamesPlayed: 0,
     totalGuesses: 0,
+    playedToday: false,
   };
 
   const [stats, setStats] = useState<Stats>(() => {
@@ -39,7 +49,14 @@ export default function Game() {
     const statsFetch = localStorage.getItem("stats");
     if (statsFetch) {
       try {
-        return JSON.parse(statsFetch) as Stats;
+        const parsed = JSON.parse(statsFetch);
+        parsed.history = new Map(
+          parsed.history.map(([date, log]: [string, Array<Result>]) => [
+            new Date(date),
+            log,
+          ]),
+        );
+        return parsed as Stats;
       } catch (error) {
         console.error("Failed to parse stats from localStorage", error);
       }
@@ -48,8 +65,16 @@ export default function Game() {
   });
 
   useEffect(() => {
-    localStorage.setItem("stats", JSON.stringify(stats));
+    const serialized = {
+      ...stats,
+      history: Array.from(stats.history.entries()),
+    };
+    localStorage.setItem("stats", JSON.stringify(serialized));
   }, [stats]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("gameState", JSON.stringify(gameState));
+  // }, [gameState]);
 
   useEffect(() => {
     if ((gameState.won || gameState.lost) && !statsUpdated) {
@@ -66,7 +91,8 @@ export default function Game() {
               gameResults.push(Result.Wrong);
             }
           }
-          const newHistory = [...prev.history, gameResults];
+          const newHistory = new Map(prev.history);
+          newHistory.set(today, gameResults);
           const newGamesPlayed = prev.gamesPlayed + 1;
           const newTotalGuesses = prev.totalGuesses + gameState.guesses;
           return {
@@ -74,24 +100,25 @@ export default function Game() {
             winStreak: prev.winStreak + 1,
             wins: prev.wins + 1,
             gamesPlayed: newGamesPlayed,
-            winPct: Number((((prev.wins + 1) / newGamesPlayed) * 100).toFixed(2)),
+            winPct: Number(
+              (((prev.wins + 1) / newGamesPlayed) * 100).toFixed(2),
+            ),
             history: newHistory,
             avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
             totalGuesses: newTotalGuesses,
+            playedToday: true,
           };
         });
       } else if (gameState.lost) {
         setStats((prev) => {
-          const newHistory = [
-            ...prev.history,
-            [
-              Result.Wrong,
-              Result.Wrong,
-              Result.Wrong,
-              Result.Wrong,
-              Result.Wrong,
-            ],
-          ];
+          const newHistory = new Map(prev.history);
+          newHistory.set(today, [
+            Result.Wrong,
+            Result.Wrong,
+            Result.Wrong,
+            Result.Wrong,
+            Result.Wrong,
+          ]);
           const newGamesPlayed = prev.gamesPlayed + 1;
           const newTotalGuesses = prev.totalGuesses + gameState.guesses;
           return {
@@ -103,6 +130,7 @@ export default function Game() {
             history: newHistory,
             avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
             totalGuesses: newTotalGuesses,
+            playedToday: true,
           };
         });
       }
@@ -115,7 +143,7 @@ export default function Game() {
       wins: 0,
       losses: 0,
       winPct: 0,
-      history: [],
+      history: new Map(),
       avgGuesses: 0,
       gamesPlayed: 0,
       totalGuesses: 0,

@@ -41,10 +41,7 @@ export default function StatsModal({
           <p>Average Guesses: {String(stats.avgGuesses)}</p>
           <p>Total Games: {stats.gamesPlayed}</p>
           <GameLog stats={stats} />
-          <Button
-            variant="danger"
-            onClick={() => setShowDeleteModal(true)}
-          >
+          <Button variant="danger" onClick={() => setShowDeleteModal(true)}>
             Reset Stats
           </Button>
         </Modal.Body>
@@ -74,13 +71,14 @@ function GameLog({ stats }: { stats: Stats }): ReactNode {
     }
     return `${emojiArray[0]} | ${emojiArray[1]} | ${emojiArray[2]} | ${emojiArray[3]} | ${emojiArray[4]}`;
   };
-
   return (
     <div id="history">
       <p>Game Logs</p>
       <ul>
-        {stats.history.map((log, index) => (
-          <li key={index}>{constructLog(log)}</li>
+        {Array.from(stats.history.entries()).map(([date, log]) => (
+          <li key={date.toString()}>
+            {date.toLocaleDateString()}: {constructLog(log)}
+          </li>
         ))}
       </ul>
     </div>
@@ -109,6 +107,10 @@ function DeleteModal({
         </Modal.Header>
         <Modal.Body>
           <p>Are you sure you want to reset your stats?</p>
+          <p>
+            Note that if you reset stats and haven't played today, you wont be
+            able to play today.
+          </p>
           <p>This action cannot be undone.</p>
           <Button
             variant="danger"

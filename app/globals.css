@@ -335,3 +335,27 @@ main {
   text-align: center;
   margin: 0;
 }
+
+.statsModalDialog .modal-body p {
+  font-size: clamp(1.0rem, 2.5vw, 1.00rem);
+}
+
+#history p {
+  text-align: center;
+}
+
+.deleteModalDialog .modal-header {
+  display: flex;
+  align-items: center;
+}
+
+.deleteModalDialog .modal-header h1 {
+  color: red;
+  flex: 1;
+  text-align: center;
+  margin: 0;
+}
+
+.deleteModalDialog .modal-body p {
+  font-size: clamp(1.0rem, 2.5vw, 1.00rem);
+}

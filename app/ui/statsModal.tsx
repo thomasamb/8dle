@@ -35,11 +35,11 @@ export default function StatsModal({
           <h1>Stats</h1>
         </Modal.Header>
         <Modal.Body>
-          <p>Total Games: {stats.gamesPlayed}</p>
           <p>Wins: {stats.wins}</p>
           <p>Losses: {stats.losses}</p>
           <p>Win Pct: {String(stats.winPct)}%</p>
           <p>Average Guesses: {String(stats.avgGuesses)}</p>
+          <p>Total Games: {stats.gamesPlayed}</p>
           <GameLog stats={stats} />
           <Button variant="danger" onClick={() => setShowDeleteModal(true)}>
             Reset Stats
@@ -97,13 +97,12 @@ function DeleteModal({
     <div id="deleteContainer">
       <Modal
         dialogClassName="deleteModalDialog"
-        id="deleteModal"
         show={showModal}
         onHide={onHide}
         backdrop={true}
       >
         <Modal.Header closeButton>
-          <p>Delete Stats</p>
+          <h1>Delete Stats</h1>
         </Modal.Header>
         <Modal.Body>
           <p>Are you sure you want to reset your stats?</p>

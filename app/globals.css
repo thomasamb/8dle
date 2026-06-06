@@ -378,3 +378,16 @@ main {
   align-items: center;
   gap: var(--spacing-sm);
 }
+
+/* Info Modal */
+.infoModalDialog .modal-header {
+  display: flex;
+  align-items: center;
+}
+
+.infoModalDialog .modal-header h1 {
+  color: var(--blue-color);
+  flex: 1;
+  text-align: center;
+  margin: 0;
+}

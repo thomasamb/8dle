@@ -6,5 +6,5 @@ export default function getTodayDate(): string {
     day: "2-digit",
   });
   const [month, day, year] = dateTimeToday.split("/");
-  return `${month}/${day}/${year}`
+  return `${month}/${day}/${year}`;
 }

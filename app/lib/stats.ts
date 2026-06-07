@@ -3,7 +3,7 @@ export type Stats = {
   wins: number;
   losses: number;
   winPct: Number;
-  history: Map<Date, Array<Result>>;
+  history: Map<string, Array<Result>>;
   avgGuesses: Number;
   gamesPlayed: number;
   totalGuesses: number;

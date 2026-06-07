@@ -2,7 +2,7 @@
 import Search from "./search";
 import GameState from "../lib/gameState";
 import Clue from "./clue";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import GameHandler from "../lib/gameHandler";
 import { Button, Modal } from "react-bootstrap";
 import Image from "next/image";
@@ -13,23 +13,43 @@ import { IoIosStats } from "react-icons/io";
 import InfoModal from "./infoModal";
 import StatsModal from "./statsModal";
 import { Stats, Result } from "../lib/stats";
+import getTodayDate from "../lib/dateHelper";
 
 export default function Game() {
-  // TODO: Store gameState in localStorage as well
   const numRounds = 5;
-  const [gameHandler, setGameHandler] = useState(new GameHandler());
-  const [gameState, setGameState] = useState(gameHandler.gameState);
+  const today = getTodayDate();
+  const [mounted, setMounted] = useState(false);
+  const [gameState, setGameState] = useState<GameState>(() => {
+    if (typeof window === "undefined") {
+      return new GameHandler().gameState;
+    }
+    const gameStateFetch = localStorage.getItem("gameState");
+    if (gameStateFetch) {
+      try {
+        const parsed = JSON.parse(gameStateFetch) as GameState;
+        if (parsed.date !== today) {
+          console.log(`parsed date ${parsed.date} unequal to today ${today}`);
+          return new GameHandler().gameState;
+        }
+        return parsed;
+      } catch (error) {
+        console.error("Failed to get gameState from localStorage", error);
+      }
+    }
+    return new GameHandler().gameState;
+  });
+
+  const [gameHandler] = useState(() => {
+    const handler = new GameHandler();
+    handler.gameState = gameState;
+    return handler;
+  });
+
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
-  const [statsUpdated, setStatsUpdated] = useState(false);
-  const dateTimeToday = new Date().toLocaleDateString("en-US", {
-    timeZone: "America/New_York",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  const [month, day, year] = dateTimeToday.split("/");
-  const today = new Date(Number(year), Number(month) - 1, Number(day));
+  const [statsUpdated, setStatsUpdated] = useState(
+    () => gameState.won || gameState.lost,
+  );
   const blankStats = {
     winStreak: 0,
     wins: 0,
@@ -39,7 +59,6 @@ export default function Game() {
     avgGuesses: 0,
     gamesPlayed: 0,
     totalGuesses: 0,
-    playedToday: false,
   };
 
   const [stats, setStats] = useState<Stats>(() => {
@@ -52,7 +71,7 @@ export default function Game() {
         const parsed = JSON.parse(statsFetch);
         parsed.history = new Map(
           parsed.history.map(([date, log]: [string, Array<Result>]) => [
-            new Date(date),
+            date,
             log,
           ]),
         );
@@ -65,6 +84,10 @@ export default function Game() {
   });
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const serialized = {
       ...stats,
       history: Array.from(stats.history.entries()),
@@ -72,9 +95,10 @@ export default function Game() {
     localStorage.setItem("stats", JSON.stringify(serialized));
   }, [stats]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("gameState", JSON.stringify(gameState));
-  // }, [gameState]);
+  useEffect(() => {
+    localStorage.setItem("gameState", JSON.stringify(gameState));
+    gameHandler.gameState = gameState;
+  }, [gameState]);
 
   useEffect(() => {
     if ((gameState.won || gameState.lost) && !statsUpdated) {
@@ -106,7 +130,6 @@ export default function Game() {
             history: newHistory,
             avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
             totalGuesses: newTotalGuesses,
-            playedToday: true,
           };
         });
       } else if (gameState.lost) {
@@ -130,7 +153,6 @@ export default function Game() {
             history: newHistory,
             avgGuesses: Number((newTotalGuesses / newGamesPlayed).toFixed(2)),
             totalGuesses: newTotalGuesses,
-            playedToday: true,
           };
         });
       }
@@ -149,6 +171,7 @@ export default function Game() {
       totalGuesses: 0,
     });
   }
+  if (!mounted) return null;
 
   return (
     <div id="game">
@@ -167,8 +190,19 @@ export default function Game() {
         <Button
           onClick={() => {
             console.log(localStorage.getItem("stats"));
+            // console.log(localStorage.getItem("gameState"));
+            console.log(today);
           }}
-        ></Button>
+        >
+          Debug
+        </Button>
+        <Button
+          onClick={() => {
+            setGameState(new GameHandler().gameState);
+          }}
+        >
+          Wipe Game State
+        </Button>
         <IoIosStats onClick={() => setShowStatsModal(!showStatsModal)} />
       </div>
       <GameHeader gameState={gameState} />

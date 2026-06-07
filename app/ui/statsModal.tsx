@@ -76,8 +76,8 @@ function GameLog({ stats }: { stats: Stats }): ReactNode {
       <p>Game Logs</p>
       <ul>
         {Array.from(stats.history.entries()).map(([date, log]) => (
-          <li key={date.toString()}>
-            {date.toLocaleDateString()}: {constructLog(log)}
+          <li key={date}>
+            {date}: {constructLog(log)}
           </li>
         ))}
       </ul>
@@ -107,10 +107,6 @@ function DeleteModal({
         </Modal.Header>
         <Modal.Body>
           <p>Are you sure you want to reset your stats?</p>
-          <p>
-            Note that if you reset stats and haven't played today, you wont be
-            able to play today.
-          </p>
           <p>This action cannot be undone.</p>
           <Button
             variant="danger"

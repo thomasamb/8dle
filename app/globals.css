@@ -257,6 +257,7 @@ ul {
   margin-bottom: var(--spacing-xsm);
   text-align: center;
   font-size: clamp(0.6rem, 2vw, 0.875rem);
+  padding: 0 var(--spacing-md);
 }
 
 /* Game End Modal */

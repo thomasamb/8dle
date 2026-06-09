@@ -8,4 +8,3 @@ export default function getTodayDate(): string {
   const [month, day, year] = dateTimeToday.split("/");
   return `${month}/${day}/${year}`;
 }
-

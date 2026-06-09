@@ -233,7 +233,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Banana/DryDryDesert/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Banana/DryDryDesert/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Banana/BananaCup.png`,
-    consolePath: `${consolePathPrefix}/GameCube.png`,
+    consolePath: `${consolePathPrefix}/Gamecube.png`,
     consoleOrigin: Console.GameCube,
   },
   {
@@ -288,7 +288,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Leaf/SherbetLand/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Leaf/SherbetLand/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Leaf/LeafCup.png`,
-    consolePath: `${consolePathPrefix}/GameCube.png`,
+    consolePath: `${consolePathPrefix}/Gamecube.png`,
     consoleOrigin: Console.GameCube,
   },
   {
@@ -365,7 +365,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Egg/YoshiCircuit/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Egg/YoshiCircuit/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Egg/EggCup.png`,
-    consolePath: `${consolePathPrefix}/GameCube.png`,
+    consolePath: `${consolePathPrefix}/Gamecube.png`,
     consoleOrigin: Console.GameCube,
   },
   {
@@ -453,7 +453,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Crossing/BabyPark/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Crossing/BabyPark/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Crossing/CrossingCup.png`,
-    consolePath: `${consolePathPrefix}/GameCube.png`,
+    consolePath: `${consolePathPrefix}/Gamecube.png`,
     consoleOrigin: Console.GameCube,
   },
   {
@@ -871,7 +871,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Boomerang/WaluigiStadium/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Boomerang/WaluigiStadium/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Boomerang/BoomerangCup.png`,
-    consolePath: `${consolePathPrefix}/GameCube.png`,
+    consolePath: `${consolePathPrefix}/Gamecube.png`,
     consoleOrigin: Console.GameCube,
   },
   {
@@ -904,7 +904,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Feather/DaisyCruiser/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Feather/DaisyCruiser/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Feather/FeatherCup.png`,
-    consolePath: `${consolePathPrefix}/GameCube.png`,
+    consolePath: `${consolePathPrefix}/Gamecube.png`,
     consoleOrigin: Console.GameCube,
   },
   {
@@ -992,7 +992,7 @@ export const answerSet: Array<Answer> = [
     screenshotPath: `${cupPathPrefix}/Acorn/DKMountain/screenshot.png`,
     trackMainImagePath: `${cupPathPrefix}/Acorn/DKMountain/mainImage.png`,
     cupImagePath: `${cupPathPrefix}/Acorn/AcornCup.png`,
-    consolePath: `${consolePathPrefix}/GameCube.png`,
+    consolePath: `${consolePathPrefix}/Gamecube.png`,
     consoleOrigin: Console.GameCube,
   },
   {

@@ -22,7 +22,7 @@ export function Round1({ gameState }: { gameState: GameState }): ReactNode {
 export function Round2({ gameState }: { gameState: GameState }): ReactNode {
   return (
     <div id="round2">
-      <Image
+      <img
         src={gameState.answer.consolePath}
         alt={gameState.answer.consoleOrigin}
         height={100}

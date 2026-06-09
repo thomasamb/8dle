@@ -19,37 +19,12 @@ export default function Game() {
   const numRounds = 5;
   const today = getTodayDate();
   const [mounted, setMounted] = useState(false);
-  const [gameState, setGameState] = useState<GameState>(() => {
-    if (typeof window === "undefined") {
-      return new GameHandler().gameState;
-    }
-    const gameStateFetch = localStorage.getItem("gameState");
-    if (gameStateFetch) {
-      try {
-        const parsed = JSON.parse(gameStateFetch) as GameState;
-        if (parsed.date !== today) {
-          console.log(`parsed date ${parsed.date} unequal to today ${today}`);
-          return new GameHandler().gameState;
-        }
-        return parsed;
-      } catch (error) {
-        console.error("Failed to get gameState from localStorage", error);
-      }
-    }
-    return new GameHandler().gameState;
-  });
-
-  const [gameHandler] = useState(() => {
-    const handler = new GameHandler();
-    handler.gameState = gameState;
-    return handler;
-  });
-
+  const [gameState, setGameState] = useState<GameState | null>(null);
+  const [gameHandler, setGameHandler] = useState<GameHandler | null>(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
-  const [statsUpdated, setStatsUpdated] = useState(
-    () => gameState.won || gameState.lost,
-  );
+  const [statsUpdated, setStatsUpdated] = useState(false);
+
   const blankStats = {
     winStreak: 0,
     wins: 0,
@@ -84,7 +59,32 @@ export default function Game() {
   });
 
   useEffect(() => {
-    setMounted(true);
+    const initGame = async () => {
+      const gameStateFetch = localStorage.getItem("gameState");
+      if (gameStateFetch) {
+        try {
+          const parsed = JSON.parse(gameStateFetch) as GameState;
+          if (parsed.date === today) {
+            const handler = new GameHandler(parsed.answer);
+            handler.gameState = parsed;
+            setGameHandler(handler);
+            setGameState(parsed);
+            setStatsUpdated(parsed.won || parsed.lost);
+            setMounted(true);
+            return;
+          }
+        } catch (error) {
+          console.error("Failed to get gameState from localStorage", error);
+        }
+      }
+      const res = await fetch("/api/today");
+      const data = await res.json();
+      const handler = new GameHandler(data.answer);
+      setGameHandler(handler);
+      setGameState(handler.gameState);
+      setMounted(true);
+    };
+    initGame();
   }, []);
 
   useEffect(() => {
@@ -96,11 +96,14 @@ export default function Game() {
   }, [stats]);
 
   useEffect(() => {
-    localStorage.setItem("gameState", JSON.stringify(gameState));
-    gameHandler.gameState = gameState;
+    if (gameState) {
+      localStorage.setItem("gameState", JSON.stringify(gameState));
+      if (gameHandler) gameHandler.gameState = gameState;
+    }
   }, [gameState]);
 
   useEffect(() => {
+    if (!gameState) return;
     if ((gameState.won || gameState.lost) && !statsUpdated) {
       setStatsUpdated(true);
       if (gameState.won) {
@@ -157,7 +160,7 @@ export default function Game() {
         });
       }
     }
-  }, [gameState.won, gameState.lost]);
+  }, [gameState?.won, gameState?.lost]);
 
   function onDelete() {
     setStats({
@@ -171,7 +174,8 @@ export default function Game() {
       totalGuesses: 0,
     });
   }
-  if (!mounted) return null;
+
+  if (!mounted || !gameState || !gameHandler) return null;
 
   return (
     <div id="game">
@@ -187,22 +191,22 @@ export default function Game() {
       />
       <div id="buttonIcons">
         <PiInfoFill onClick={() => setShowInfoModal(!showInfoModal)} />
-        <Button
+        {/* <Button
           onClick={() => {
             console.log(localStorage.getItem("stats"));
-            // console.log(localStorage.getItem("gameState"));
-            console.log(today);
           }}
         >
           Debug
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           onClick={() => {
-            setGameState(new GameHandler().gameState);
+            const handler = new GameHandler();
+            setGameHandler(handler);
+            setGameState(handler.gameState);
           }}
         >
           Wipe Game State
-        </Button>
+        </Button> */}
         <IoIosStats onClick={() => setShowStatsModal(!showStatsModal)} />
       </div>
       <GameHeader gameState={gameState} />
@@ -211,7 +215,9 @@ export default function Game() {
       {!gameState.won && !gameState.lost && (
         <Search
           gameState={gameState}
-          setGameState={setGameState}
+          setGameState={
+            setGameState as React.Dispatch<React.SetStateAction<GameState>>
+          }
           gameHandler={gameHandler}
         />
       )}

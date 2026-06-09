@@ -30,6 +30,7 @@ export default function InfoModal({
           <p>5. A screenshot from gameplay of the track.</p>
           <p>To view your stats, click/tap the stats icon in the top right.</p>
           <p>You can also reset your stats in the stats view.</p>
+          <p>The game resets every midnight Eastern Standard Time.</p>
         </Modal.Body>
       </Modal>
     </div>

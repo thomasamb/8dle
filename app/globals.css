@@ -348,7 +348,7 @@ ul {
 }
 
 .statsModalDialog .modal-body p {
-  font-size: clamp(1.0rem, 2.5vw, 1.00rem);
+  font-size: clamp(1rem, 2.5vw, 1rem);
 }
 
 .statsModalBody .btn-danger {
@@ -373,7 +373,7 @@ ul {
 }
 
 .deleteModalDialog .modal-body p {
-  font-size: clamp(1.0rem, 2.5vw, 1.00rem);
+  font-size: clamp(1rem, 2.5vw, 1rem);
 }
 
 .deleteModalBody {

@@ -18,7 +18,7 @@ export async function GET(
 
     return new Response(result.rows[0].data, {
       headers: {
-        "Content-Type": "image/ogg",
+        "Content-Type": "audio/ogg",
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });

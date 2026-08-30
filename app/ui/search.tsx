@@ -2,7 +2,7 @@ import GameState from "../lib/gameState";
 import { useActionState, useState } from "react";
 import GameHandler from "../lib/gameHandler";
 import { Button, Dropdown, Form, InputGroup } from "react-bootstrap";
-import { answerSet, answerMap } from "../lib/answerSet";
+import { answerSet } from "../lib/answerSet";
 import { SlArrowRightCircle } from "react-icons/sl";
 
 export default function Search({
@@ -19,21 +19,21 @@ export default function Search({
   const [inputError, setInputError] = useState(false);
 
   function validateInput(input: string): boolean {
-    return answerMap.has(input);
+    return answerSet.has(input);
   }
 
-  const filtered = answerSet.filter((answer) =>
-    answer.trackName.toLowerCase().includes(input.toLowerCase()),
+  const filtered = Array.from(answerSet).filter((name) =>
+    name.toLowerCase().includes(input.toLowerCase()),
   );
 
-  const [_, formAction] = useActionState(
-    (previousState: GameState, formData: FormData) => {
+  const [_, formAction, isPending] = useActionState(
+    async (previousState: GameState, formData: FormData) => {
       const guess = formData.get("guess") as string;
       if (!validateInput(guess)) {
         setInputError(true);
         return previousState;
       } else {
-        const result: GameState = gameHandler.submitGuess(guess);
+        const result: GameState = await gameHandler.submitGuess(guess);
         setGameState(result);
         setInputError(false);
         setInput("");
@@ -49,7 +49,7 @@ export default function Search({
         <Dropdown show={showDropdown && input.length > 0} drop="up">
           <InputGroup className="mb-3">
             <Form.Control
-              disabled={gameState.won || gameState.lost}
+              disabled={gameState.won || gameState.lost || isPending}
               type="text"
               name="guess"
               value={input}
@@ -63,7 +63,7 @@ export default function Search({
               autoComplete="off"
             />
             <Button
-              disabled={gameState.won || gameState.lost}
+              disabled={gameState.won || gameState.lost || isPending}
               id="guessButton"
               type="submit"
             >
@@ -88,15 +88,15 @@ export default function Search({
               ],
             }}
           >
-            {filtered.map((answer) => (
+            {filtered.map((name) => (
               <Dropdown.Item
-                key={answer.trackName}
+                key={name}
                 onMouseDown={() => {
-                  setInput(answer.trackName);
+                  setInput(name);
                   setShowDropdown(false);
                 }}
               >
-                {answer.trackName}
+                {name}
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>

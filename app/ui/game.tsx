@@ -4,7 +4,7 @@ import GameState from "../lib/gameState";
 import Clue from "./clue";
 import { useState, useEffect } from "react";
 import GameHandler from "../lib/gameHandler";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import Image from "next/image";
 import RoundTracker from "./roundTracker";
 import Share from "./share";
@@ -15,6 +15,11 @@ import StatsModal from "./statsModal";
 import { Stats, Result } from "../lib/stats";
 import getTodayDate from "../lib/dateHelper";
 
+type RevealedAnswer = {
+  trackName: string;
+  mainImageId: string;
+};
+
 export default function Game() {
   const numRounds = 5;
   const today = getTodayDate();
@@ -24,6 +29,9 @@ export default function Game() {
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [statsUpdated, setStatsUpdated] = useState(false);
+  const [revealedAnswer, setRevealedAnswer] = useState<RevealedAnswer | null>(
+    null,
+  );
 
   const blankStats = {
     winStreak: 0,
@@ -35,6 +43,14 @@ export default function Game() {
     gamesPlayed: 0,
     totalGuesses: 0,
   };
+
+  useEffect(() => {
+    if ((gameState?.won || gameState?.lost) && !revealedAnswer) {
+      fetch("/api/revealAnswer")
+        .then((res) => res.json())
+        .then((data: RevealedAnswer) => setRevealedAnswer(data));
+    }
+  }, [gameState?.won, gameState?.lost]);
 
   const [stats, setStats] = useState<Stats>(() => {
     if (typeof window === "undefined") {
@@ -65,8 +81,7 @@ export default function Game() {
         try {
           const parsed = JSON.parse(gameStateFetch) as GameState;
           if (parsed.date === today) {
-            const handler = new GameHandler(parsed.answer);
-            handler.gameState = parsed;
+            const handler = new GameHandler(parsed);
             setGameHandler(handler);
             setGameState(parsed);
             setStatsUpdated(parsed.won || parsed.lost);
@@ -77,9 +92,13 @@ export default function Game() {
           console.error("Failed to get gameState from localStorage", error);
         }
       }
-      const res = await fetch("/api/today");
-      const data = await res.json();
-      const handler = new GameHandler(data.answer);
+
+      const res = await fetch("/api/answer");
+      if (!res.ok) {
+        console.error("No track scheduled for today.");
+        return;
+      }
+      const handler = new GameHandler();
       setGameHandler(handler);
       setGameState(handler.gameState);
       setMounted(true);
@@ -191,25 +210,9 @@ export default function Game() {
       />
       <div id="buttonIcons">
         <PiInfoFill onClick={() => setShowInfoModal(!showInfoModal)} />
-        {/* <Button
-          onClick={() => {
-            console.log(localStorage.getItem("stats"));
-          }}
-        >
-          Debug
-        </Button> */}
-        {/* <Button
-          onClick={() => {
-            const handler = new GameHandler();
-            setGameHandler(handler);
-            setGameState(handler.gameState);
-          }}
-        >
-          Wipe Game State
-        </Button> */}
         <IoIosStats onClick={() => setShowStatsModal(!showStatsModal)} />
       </div>
-      <GameHeader gameState={gameState} />
+      <GameHeader gameState={gameState} revealedAnswer={revealedAnswer} />
       <RoundTracker gameState={gameState} />
       <Clue gameState={gameState} />
       {!gameState.won && !gameState.lost && (
@@ -222,36 +225,48 @@ export default function Game() {
         />
       )}
       {(gameState.won || gameState.lost) && <Share gameState={gameState} />}
-      <GameEndModal gameState={gameState} />
+      <GameEndModal gameState={gameState} revealedAnswer={revealedAnswer} />
     </div>
   );
 }
 
-function GameHeader({ gameState }: { gameState: GameState }) {
+function GameHeader({
+  gameState,
+  revealedAnswer,
+}: {
+  gameState: GameState;
+  revealedAnswer: RevealedAnswer | null;
+}) {
   const neutralText = "Guess the track!";
   const loserText = "You lost...";
-  const winnerText = `You guessed ${gameState.answer.trackName} in ${gameState.guesses} ${gameState.guesses === 1 ? "guess" : "guesses"}!`;
+  const winnerText = `You guessed ${revealedAnswer?.trackName} in ${gameState.guesses} ${gameState.guesses === 1 ? "guess" : "guesses"}!`;
   return (
     <div id="gameHeader">
       <h1 id="gameHeaderH1">
         {gameState.won ? winnerText : gameState.lost ? loserText : neutralText}
       </h1>
       {(gameState.won || gameState.lost) && (
-        <h2 id="gameHeaderH2">{gameState.answer.trackName}</h2>
+        <h2 id="gameHeaderH2">{revealedAnswer?.trackName}</h2>
       )}
     </div>
   );
 }
 
-function GameEndModal({ gameState }: { gameState: GameState }) {
+function GameEndModal({
+  gameState,
+  revealedAnswer,
+}: {
+  gameState: GameState;
+  revealedAnswer: RevealedAnswer | null;
+}) {
   const [hidden, setHidden] = useState(false);
   const show = (gameState.won || gameState.lost) && !hidden;
   let modalBodyTextWin = `You guessed it in ${gameState.guesses} guess${gameState.guesses === 1 ? "" : "es"}!`;
   let modalHeaderText = "";
   if (gameState.won) {
-    modalHeaderText = `You guessed it! The track was ${gameState.answer.trackName}.`;
+    modalHeaderText = `You guessed it! The track was ${revealedAnswer?.trackName}.`;
   } else if (gameState.lost) {
-    modalHeaderText = `You lost. The track was ${gameState.answer.trackName}.`;
+    modalHeaderText = `You lost. The track was ${revealedAnswer?.trackName}.`;
   }
 
   return (
@@ -266,14 +281,16 @@ function GameEndModal({ gameState }: { gameState: GameState }) {
       </Modal.Header>
       <Modal.Body className="gameEndModalBody">
         {gameState.won && <p>{modalBodyTextWin}</p>}
-        <Image
-          src={gameState.answer.trackMainImagePath}
-          alt={gameState.answer.trackName}
-          height={100}
-          width={100}
-          className="modalTrackImage"
-          unoptimized
-        />
+        {revealedAnswer && (
+          <Image
+            src={`/api/images/${revealedAnswer.mainImageId}`}
+            alt={revealedAnswer.trackName}
+            height={100}
+            width={100}
+            className="modalTrackImage"
+            unoptimized
+          />
+        )}
         <Share gameState={gameState} />
       </Modal.Body>
     </Modal>

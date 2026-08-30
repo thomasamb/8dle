@@ -71,11 +71,16 @@ function GameLog({ stats }: { stats: Stats }): ReactNode {
     }
     return `${emojiArray[0]} | ${emojiArray[1]} | ${emojiArray[2]} | ${emojiArray[3]} | ${emojiArray[4]}`;
   };
+
+  const sortedEntries = Array.from(stats.history.entries()).sort(
+    ([dateA], [dateB]) => dateB.localeCompare(dateA),
+  );
+
   return (
     <div id="history">
       <p>Game Logs</p>
       <ul>
-        {Array.from(stats.history.entries()).map(([date, log]) => (
+        {sortedEntries.map(([date, log]) => (
           <li key={date}>
             {date}: {constructLog(log)}
           </li>

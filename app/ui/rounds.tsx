@@ -63,38 +63,37 @@ export function Round3({ clue, loading, error }: RoundProps): ReactNode {
 }
 
 export function Round4({ clue, loading, error }: RoundProps) {
-  const useAudio = (src: string | null): [boolean, () => void] => {
-    const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-    const [playing, setPlaying] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
 
-    useEffect(() => {
-      if (!src) return;
-      const el = new Audio(src);
-      setAudio(el);
-      return () => {
-        el.pause();
-      };
-    }, [src]);
+  useEffect(() => {
+    if (!clue) return;
+    const el = new Audio(`/api/audio/${clue.value}`);
+    const onEnded = () => setPlaying(false);
+    el.addEventListener("ended", onEnded);
+    setAudio(el);
 
-    const toggle = () => setPlaying((prev) => !prev);
+    return () => {
+      el.pause();
+      el.removeEventListener("ended", onEnded);
+    };
+  }, [clue?.value]);
 
-    useEffect(() => {
-      if (!audio) return;
-      playing ? audio.play() : audio.pause();
-    }, [playing, audio]);
+  const toggle = () => {
+    if (!audio) return;
 
-    useEffect(() => {
-      if (!audio) return;
-      const onEnded = () => setPlaying(false);
-      audio.addEventListener("ended", onEnded);
-      return () => audio.removeEventListener("ended", onEnded);
-    }, [audio]);
-
-    return [playing, toggle];
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      audio
+        .play()
+        .then(() => setPlaying(true))
+        .catch((err) => {
+          console.error("Playback failed:", err);
+        });
+    }
   };
-
-  const audioSrc = clue ? `/api/audio/${clue.value}` : null;
-  const [playing, toggle] = useAudio(audioSrc);
 
   if (loading) return <div id="round4">Loading...</div>;
   if (error || !clue) return <div id="round4">Failed to load clue.</div>;
